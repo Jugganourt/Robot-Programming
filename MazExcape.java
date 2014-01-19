@@ -19,19 +19,26 @@ public class MazExcape
 	{
 		UltrasonicSensor range = new UltrasonicSensor(SensorPort.S4);
 		TouchSensor sensor = new TouchSensor(SensorPort.S1);
+		
+		Button.waitForAnyPress();
+		Delay.msDelay(500);
 		while(Button.ENTER.isUp())
 		{
-			if(range.getRange() < 100 && !sensor.isPressed())	//if no bump and out of range sensor keep driving
+			range.continuous();
+			
+			if(range.getDistance() < 50 && !sensor.isPressed())	//if no bump and out of range sensor keep driving
 			{
 				drive(); 	//keep driving forward 
 			}
-			else if(range.getRange() < 100 && sensor.isPressed())
+			
+			else if(range.getDistance() < 50 && sensor.isPressed())
 			{
 				bump();
 			}
+			
 			else
 			{
-				pilot.rotate(90);
+				wallLocate();
 			}
 		}
 	}
@@ -65,5 +72,13 @@ public class MazExcape
 	public static void drive()
 	{
 		pilot.forward();
+	}
+	public static void wallLocate()
+	{
+		pilot.forward();
+		Delay.msDelay(700);
+		pilot.rotate(90);
+		pilot.forward();
+		Delay.msDelay(1500);
 	}
 }
