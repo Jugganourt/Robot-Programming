@@ -1,57 +1,33 @@
 package robotics.inatthedeepend;
 
 import lejos.nxt.Button;
-import lejos.nxt.Motor;
-import lejos.robotics.RegulatedMotor;
-import lejos.robotics.navigation.DifferentialPilot;
 import lejos.util.Delay;
 
-public class Shapes {
-
-        private final static RegulatedMotor left = Motor.C;
-        private final static RegulatedMotor right = Motor.B;
-        private final static DifferentialPilot pilot = new DifferentialPilot(56, 122, left, right);
-        
-        
-        @SuppressWarnings("deprecation")
-        public static void main(String[] args)
+/**
+ * makes the robot draw shapes
+ * @author txs397
+ */
+public class Shapes 
+{
+	public static void main(String[] args)
+    {
+		RobotInformation robot = new RobotInformation();
+		robot.SetSpeed(200);
+        System.out.println("Hello World!!");
+        System.out.println("");
+        System.out.println("To start press The Orange Button");
+        System.out.println("");
+        System.out.println("To STOP hold The Orange Button");
+              
+        robot.ButtonPress();
+        while(Button.ENTER.isUp())
         {
-                System.out.println("Hello World!!");
-                System.out.println("");
-                System.out.println("To start press The Orange Button");
-                System.out.println("");
-                System.out.println("To STOP hold The Orange Button");
-                
-                Button.waitForAnyPress();
-                Delay.msDelay(500);
-                while(Button.ENTER.isUp())
-                {
-                        move1();
-                
-                }
-                
-                Button.waitForAnyPress();
-                Delay.msDelay(500);
-                while(Button.ENTER.isUp())
-                {
-                        move2();
-                
-                }
-                
+        	robot.Square();
         }
-        
-        public static void move1()
+        Delay.msDelay(500);
+        while(Button.ENTER.isUp())
         {
-                pilot.forward();
-                Delay.msDelay(2000);
-                pilot.rotate(105);
+        	robot.Hexagon();
         }
-        
-        public static void move2()
-        {
-                pilot.forward();
-                Delay.msDelay(2000);
-                pilot.rotate(50);
-        }
-        
+    }
 }
