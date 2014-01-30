@@ -1,84 +1,64 @@
 package robotics.inatthedeepend;
 
 import lejos.nxt.Button;
-import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
 import lejos.nxt.UltrasonicSensor;
-import lejos.robotics.RegulatedMotor;
-import lejos.robotics.navigation.DifferentialPilot;
-import lejos.util.Delay;
 
-public class MazeExcape
-{
-        private final static RegulatedMotor left = Motor.C;
-        private final static RegulatedMotor right = Motor.B;
-        private final static DifferentialPilot pilot = new DifferentialPilot(56, 122, left, right);
+/**
+ * Made so that the robot can escape a maze
+ * 
+ * @author txs397
+ * 
+ */
+public class MazeExcape {
 
-        public static void main(String[] args)
-        {
-                UltrasonicSensor range = new UltrasonicSensor(SensorPort.S4);
-                TouchSensor sensor = new TouchSensor(SensorPort.S1);
-                
-                Button.waitForAnyPress();
-                Delay.msDelay(500);
-                while(Button.ENTER.isUp())
-                {
-                        range.continuous();
-                        
-                        if(range.getDistance() < 50 && !sensor.isPressed())        //if no bump and out of range sensor keep driving
-                        {
-                                drive();         //keep driving forward
-                        }
-                        
-                        else if(range.getDistance() < 50 && sensor.isPressed())
-                        {
-                                bump();
-                        }
-                        
-                        else
-                        {
-                                wallLocate();
-                        }
-                }
-        }
-        
-        public static void bump()
-        {
-                TouchSensor sensor = new TouchSensor(SensorPort.S1);
-                if(sensor.isPressed()) //if bump
-                {
-                        backwards(); //back a bit
-                        spin(180); //turn
-                }
-        }
-        
-        private void stop()
-        {
-                pilot.stop();
-        }
+	private final static int distanceFromWall = 45;
+	private final static int tooCloseToTheWall = 10;
 
-        private static void spin(double angle)
-        {
-                pilot.rotate(angle);;
-        }
-        
-        public static void backwards()
-        {
-                pilot.backward();
-                Delay.msDelay(500);
-        }
-        
-        public static void drive()
-        {
-                pilot.forward();
-        }
-        public static void wallLocate()
-        {
-                pilot.forward();
-                Delay.msDelay(700);
-                pilot.rotate(90);
-                pilot.forward();
-                Delay.msDelay(1500);
-        }
+	public static void main(String[] args) {
+		System.out.println("To start press The Orange Button");
+		System.out.println("");
+		System.out.println("To STOP hold The Orange Button");
+
+		RobotInformation robot = new RobotInformation();
+		UltrasonicSensor range = new UltrasonicSensor(SensorPort.S4);
+		TouchSensor sensor = new TouchSensor(SensorPort.S1);
+
+		robot.buttonPress();
+		while (Button.ENTER.isUp()) {
+			robot.setSpeed(200);
+			range.continuous();
+
+			if (range.getDistance() < tooCloseToTheWall) {
+				robot.moveAwayFromWall();
+			}
+
+			if (range.getDistance() <= distanceFromWall && !sensor.isPressed()) {
+				robot.drive();
+			}
+
+			if (range.getDistance() > distanceFromWall && !sensor.isPressed()) {
+				robot.stop();
+				robot.noWall();
+				robot.stop();
+			}
+
+			if (range.getDistance() <= distanceFromWall && sensor.isPressed())
+
+			{
+				robot.stop();
+				robot.backwardsFar();
+				robot.spin(-90);
+			}
+
+			if (range.getDistance() > distanceFromWall && sensor.isPressed()) {
+				robot.stop();
+				robot.backwardsFar();
+				robot.spin(90);
+				robot.stop();
+			}
+
+		}
+	}
 }
