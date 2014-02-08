@@ -3,14 +3,14 @@ package robotics.FeedbackAndFriend;
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
+import lejos.nxt.Sound;
 import lejos.util.Delay;
 
 public class FollowLine extends RobotSettings {
 
-	public static LightSensor left = new LightSensor(SensorPort.S3);
-	public static LightSensor right = new LightSensor(SensorPort.S2);
-	private int threshold = 40;
-
+	public static LightSensor s_left = new LightSensor(SensorPort.S3);
+	public static LightSensor s_right = new LightSensor(SensorPort.S2);
+	private int thresholdBlackNBlue = 43;
 	public FollowLine() {
 		super();
 	}
@@ -19,30 +19,31 @@ public class FollowLine extends RobotSettings {
 		while (m_run()) {
 			pilot.setTravelSpeed(300);
 			
-			if(left.readValue() < threshold && right.readValue() >threshold)
+			if(s_left.readValue() < thresholdBlackNBlue && s_right.readValue() >thresholdBlackNBlue)
 			{
 				pilot.rotate(20);
 			}
 			
-			if(left.readValue() < threshold && right.readValue() < threshold)
+			if(s_left.readValue() < thresholdBlackNBlue && s_right.readValue() < thresholdBlackNBlue)
 			{
-				if(left.readValue( )<threshold){
-					pilot.rotate(-90);
+				if(s_left.readValue( ) < thresholdBlackNBlue){
+					pilot.rotate(20);
 				}
-				else{
-					pilot.rotate(90);
+				if(s_left.readValue( ) > thresholdBlackNBlue){
+					pilot.rotate(-20);
 				}
 			
 			}
-			if(left.readValue() > threshold && right.readValue() > threshold )
+			if(s_left.readValue() > thresholdBlackNBlue && s_right.readValue() > thresholdBlackNBlue )
 			{
 				pilot.forward(); 
 			} 
-			if(left.readValue() > threshold && right.readValue() < threshold)
+			if(s_left.readValue() > thresholdBlackNBlue && s_right.readValue() < thresholdBlackNBlue)
 			{
 				pilot.rotate(-20);
 				
 			}
+			
 		}
 	}
 
