@@ -92,6 +92,22 @@ public class RobotMoves extends RobotSettings {
 					pilot.rotate(-90);
 				else pilot.forward();
 		}
+	
+	}
+	public int junctionReturn(int ran,int i){
+		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
+		{
+			
+			pilot.travel(60);
+			if(ran == 1)
+				pilot.rotate(90);
+			else
+				if(ran ==2)
+					pilot.rotate(-90);
+				else pilot.forward();
+			i++;
+		}
+	return i;
 	}
 
 
