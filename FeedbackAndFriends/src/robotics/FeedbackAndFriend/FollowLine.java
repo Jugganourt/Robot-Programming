@@ -1,13 +1,8 @@
 package robotics.FeedbackAndFriend;
 
-import java.util.Random;
+public class FollowLine extends RobotMoves {
 
-
-public class Grid2 extends RobotMoves {
-
-	private Random rand = new Random();
-
-	public Grid2() {
+	public FollowLine() {
 		super();
 	}
 
@@ -15,18 +10,17 @@ public class Grid2 extends RobotMoves {
 		while (m_run()) {
 			pilot.setTravelSpeed(300);
 
-			int ran = rand.nextInt(3);
-			forwardCondition();
-			junction(ran);
-			closeToGridWallCondition();
-			rightCondition();
 			leftCondition();
+			stuckCondition();
+			forwardCondition();
+			rightCondition();
+
 		}
 	}
 
 	public static void main(String[] args) {
 		buttonPress();
-		Grid2 run = new Grid2();
+		FollowLine run = new FollowLine();
 		run.run();
 
 	}
