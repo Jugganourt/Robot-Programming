@@ -1,5 +1,6 @@
 package rp13.search.problem.puzzle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rp13.search.interfaces.SuccessorFunction;
@@ -46,6 +47,28 @@ public class EightPuzzleSuccessorFunction implements
 						.add(new ActionStatePair<EightPuzzle.PuzzleMove, EightPuzzle>(
 								move, successor));
 			}
+
+		}
+
+	}
+
+	public static void main(String[] args) {
+		EightPuzzle state = EightPuzzle.orderedEightPuzzle();
+		EightPuzzleSuccessorFunction successorFn = new EightPuzzleSuccessorFunction();
+
+		// successors are added to the end of this list by the successor
+		// function
+		List<ActionStatePair<PuzzleMove, EightPuzzle>> successors = new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>();
+		;
+		// get the successors of the given state
+		successorFn.getSuccessors(state, successors);
+
+		for (ActionStatePair<PuzzleMove, EightPuzzle> successor : successors) {
+
+			System.out.println("Applied move " + successor.getAction()
+					+ " and got:");
+
+			System.out.println(successor.getState());
 
 		}
 

@@ -181,6 +181,28 @@ public class EightPuzzle {
 		return sb.toString();
 
 	}
+	
+	/**
+	 * Returns a String representation of the Eight Puzzle on a single line.
+	 * 
+	 * @return A one-line representation of the EightPuzzle.
+	 */
+	public String toSingleLineString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < m_board.length; i++) 
+		{
+			if (m_board[i] == BLANK) {
+				sb.append("X");
+			}
+			else {
+				sb.append(m_board[i]);
+			}
+		}
+		
+		return sb.toString();
+	}
 
 	@Override
 	public boolean equals(Object _that) {
@@ -201,7 +223,7 @@ public class EightPuzzle {
 	/**
 	 * Creates an eight puzzle with the pieces in the correct order
 	 * 
-	 * @return
+	 * @return Returns an ordered Eight Puzzle.
 	 */
 	public static EightPuzzle orderedEightPuzzle() {
 		return new EightPuzzle();
@@ -210,7 +232,7 @@ public class EightPuzzle {
 	/**
 	 * Creates a randomised eight puzzle using the given number of random moves.
 	 * 
-	 * @return
+	 * @return Returns a random (but legal) Eight Puzzle.
 	 */
 	public static EightPuzzle randomEightPuzzle(int _moves) {
 		EightPuzzle puzzle = new EightPuzzle();
@@ -223,7 +245,7 @@ public class EightPuzzle {
 	/**
 	 * Creates a randomised eight puzzle.
 	 * 
-	 * @return
+	 * @return Returns a random (but legal) Eight Puzzle.
 	 */
 	public static EightPuzzle randomEightPuzzle() {
 		return randomEightPuzzle(WIDTH * WIDTH * WIDTH);
