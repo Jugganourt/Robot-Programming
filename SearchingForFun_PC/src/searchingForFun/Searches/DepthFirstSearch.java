@@ -1,6 +1,6 @@
 package searchingForFun.Searches;
 
-public class DepthFirstSearch {
+public class DepthFirstSearch  {
 		
 		//take the first node
 		//see if its the goal state
