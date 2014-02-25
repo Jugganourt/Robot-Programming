@@ -25,7 +25,7 @@ public class QueueClass<ItemT> implements Agenda<ItemT> {
 	@Override
 	public ItemT pop() {
 		// TODO Auto-generated method stub
-		return queue.peek();
+		return queue.poll();
 	}
 
 	@Override

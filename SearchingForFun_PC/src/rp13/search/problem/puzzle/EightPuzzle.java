@@ -4,6 +4,8 @@ package rp13.search.problem.puzzle;
 import java.util.Arrays;
 import java.util.Random;
 
+import rp13.search.interfaces.GoalTest;
+
 /**
  * 
  * A class to represent a 3x3 sliding tile puzzle, such as:
@@ -15,7 +17,7 @@ import java.util.Random;
  * @author Nick Hawes
  * 
  */
-public class EightPuzzle {
+public class EightPuzzle implements GoalTest<EightPuzzle> {
 
 	/**
 	 * Explicit enumeration of moves the blank tile can take.
@@ -263,6 +265,15 @@ public class EightPuzzle {
 			System.out.println(puzzle);
 		}
 
+	}
+
+	@Override
+	public boolean isGoal(EightPuzzle _state) {
+		EightPuzzle goal = EightPuzzle.orderedEightPuzzle();
+		if(_state==goal)
+			return true;
+		else
+			return false;
 	}
 
 }
