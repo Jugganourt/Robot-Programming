@@ -33,11 +33,11 @@ public class BreadthFirstSearch extends QueueClass
 		EightPuzzle start = EightPuzzle.randomEightPuzzle();
 		
 		
-		//System.out.println(start);
+		System.out.println(start);
 		
 		EightPuzzle goal = EightPuzzle.orderedEightPuzzle();
 		
-		//System.out.println(goal);
+		System.out.println(goal);
 
 		// start.getSuccessor(start,list);
 		Queue<EightPuzzle> visited = new LinkedList<EightPuzzle>();
@@ -56,8 +56,9 @@ public class BreadthFirstSearch extends QueueClass
 		while (!agenda.isEmpty()) {
 			node = agenda.pop();
 			//System.out.println(node);
-			if (node.getState() == goal) {
+			if (node.getState().equals(goal)) {
 				return node;
+				
 			} else {
 				sf.getSuccessors(node.getState(), _successors);
 				visited.add(node.getState());
@@ -74,16 +75,3 @@ public class BreadthFirstSearch extends QueueClass
 	}
 }
 
-// generate successors
-// add them to a temporary list
-// check if i have visited the node before
-// if not -> add it to the queue
-/**
- * else{ //generate successors...call to successor function that
- * was showin in the last lecutre //... one search node per
- * successor to push on t0 the adgernda //the agenda is the list
- * of next moves ( e.g. successor) // missing inform search to
- * cheack if a node already excicst in the adgenda.. and a
- * closed list to see the ones you have already searched
- * for(SearchNode node: successors){ agenda.push(node); } } }
- */
