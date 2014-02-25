@@ -23,11 +23,6 @@ public class BreadthFirstSearch
 		super();
 	}
 
-	// take the first node
-	// see if its the goal state
-	// if not, finds successors
-	// add successors to the back of the list
-	// start again...
 	public ActionStatePair<PuzzleMove, EightPuzzle> Search() {
 		agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 		start = EightPuzzle.randomEightPuzzle();
