@@ -12,10 +12,19 @@ public class SearchObject {
 		
 		BreadthFirstSearch bfs = new BreadthFirstSearch();
 		
-		ActionStatePair<PuzzleMove, EightPuzzle> x = bfs.Search();
+		DepthFirstSearch dfs = new DepthFirstSearch();
+		System.out.println("Breadth");
 		
+		ActionStatePair<PuzzleMove, EightPuzzle> x = bfs.Search();
 		System.out.println(x);
 		
+		 
+		System.out.println("");
+		
+		System.out.println("Depth");
+		
+		ActionStatePair<PuzzleMove, EightPuzzle> y = dfs.Search();
+		System.out.println(y);
 		
 		
 		

@@ -12,7 +12,7 @@ import rp13.search.util.ActionStatePair;
 
 //ActionStatePair<PuzzleMove, EightPuzzle>
 
-public class BreadthFirstSearch extends QueueClass 
+public class BreadthFirstSearch 
 {
 	private QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>> agenda;
 	private EightPuzzle start;
@@ -29,8 +29,8 @@ public class BreadthFirstSearch extends QueueClass
 	// add successors to the back of the list
 	// start again...
 	public ActionStatePair<PuzzleMove, EightPuzzle> Search() {
-		QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>> agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
-		EightPuzzle start = EightPuzzle.randomEightPuzzle();
+		agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
+		start = EightPuzzle.randomEightPuzzle();
 		
 		
 		System.out.println(start);
@@ -57,8 +57,9 @@ public class BreadthFirstSearch extends QueueClass
 			node = agenda.pop();
 			//System.out.println(node);
 			if (node.getState().equals(goal)) {
-				return node;
+			
 				
+				return node;
 			} else {
 				sf.getSuccessors(node.getState(), _successors);
 				visited.add(node.getState());
