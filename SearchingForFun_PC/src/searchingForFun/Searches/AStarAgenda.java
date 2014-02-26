@@ -1,5 +1,55 @@
 package searchingForFun.Searches;
 
-public class AStarAgenda {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+import rp13.search.interfaces.SortedAgenda;
+
+public class AStarAgenda<ItemT extends Comparable<ItemT>> implements SortedAgenda {
+	
+	private ArrayList<ItemT> list = new ArrayList<ItemT>();
+
+	@Override
+	public void push(Object _item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object pop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean contains(Object _item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterator iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SearchNode<StateT, ActionT> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<SearchNode<StateT, ActionT>> agenda)
+	
+	@Override
+	public void sort() {
+		
+		java.util.Collections.sort(list);
+	}
+	
+	
 
 }
