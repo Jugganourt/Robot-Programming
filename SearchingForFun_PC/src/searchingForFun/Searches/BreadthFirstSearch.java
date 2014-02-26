@@ -27,14 +27,13 @@ public class BreadthFirstSearch
 		agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 		start = EightPuzzle.randomEightPuzzle();
 		
-		
+		System.out.println("Start node look like:");
 		System.out.println(start);
 		
 		EightPuzzle goal = EightPuzzle.orderedEightPuzzle();
-		
+		System.out.println("End node look like:");
 		System.out.println(goal);
-
-		// start.getSuccessor(start,list);
+		
 		Queue<EightPuzzle> visited = new LinkedList<EightPuzzle>();
 		List<ActionStatePair<PuzzleMove, EightPuzzle>> _successors = new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>();
 		sf.getSuccessors(start, _successors);
@@ -42,7 +41,6 @@ public class BreadthFirstSearch
 		visited.add(start);
 
 		for (ActionStatePair<PuzzleMove, EightPuzzle> node : _successors) {
-			//System.out.println(node);
 			if (visited.contains(node.getState()) == false)
 				agenda.push(node);
 
@@ -50,10 +48,11 @@ public class BreadthFirstSearch
 		_successors.clear();
 		while (!agenda.isEmpty()) {
 			node = agenda.pop();
-			//System.out.println(node);
 			if (node.getState().equals(goal)) {
-			
 				
+				System.out.println("Route:");
+				System.out.println();
+								
 				return node;
 			} else {
 				sf.getSuccessors(node.getState(), _successors);
