@@ -13,12 +13,10 @@ public class SearchObject {
 	
 	public static void main(String[] args){
 		
-		BreadthFirstSearch bfs = new BreadthFirstSearch();
-		DepthFirstSearch dfs = new DepthFirstSearch();
+	
 		SearchMechanics<PuzzleMove, EightPuzzle > sm = new SearchMechanics<>();
 		EightPuzzleSuccessorFunction sf = new EightPuzzleSuccessorFunction();
-		
-		Agenda<SearchMechanics<EightPuzzle, PuzzleMove>> agenda = new QueueClass<SearchMechanics<EightPuzzle, PuzzleMove>>();
+		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 		
 		sm.doSearch(EightPuzzle.orderedEightPuzzle(), EightPuzzle.randomEightPuzzle(), sf, agenda);
 		
@@ -26,16 +24,7 @@ public class SearchObject {
 		System.out.println(sm.doSearch(EightPuzzle.orderedEightPuzzle(), EightPuzzle.randomEightPuzzle(), sf, agenda));
 		
 		
-		
-		System.out.println("Breadth");
-		ActionStatePair<PuzzleMove, EightPuzzle> x = bfs.Search();
-		System.out.println(x);
-		
-		System.out.println("");
-		System.out.println("Depth");
-		ActionStatePair<PuzzleMove, EightPuzzle> y = dfs.Search();
-		System.out.println(y);
-		
+	
 		
 		
 		
