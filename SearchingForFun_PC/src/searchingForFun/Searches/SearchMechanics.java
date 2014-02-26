@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
 import rp13.search.interfaces.Agenda;
 import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.util.ActionStatePair;
@@ -22,6 +21,15 @@ public class SearchMechanics<ActionT,StateT>
 	public ActionStatePair<ActionT, StateT> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda)
 	{
 		
+		successorFn.getSuccessors(start, _successors);
+		visited.add(start);
+
+		for (ActionStatePair<ActionT, StateT> node : _successors) {
+			if (visited.contains(node.getState()) == false)
+				agenda.push(node);
+
+		}	
+		_successors.clear();
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
@@ -40,6 +48,7 @@ public class SearchMechanics<ActionT,StateT>
 						agenda.push(suc);
 				}
 			}
+			_successors.clear();
 		}
 		return node;
 	}
