@@ -5,62 +5,58 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import rp13.search.interfaces.Agenda;
+import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.problem.puzzle.EightPuzzle;
-import rp13.search.problem.puzzle.EightPuzzleSuccessorFunction;
-import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 import rp13.search.util.ActionStatePair;
 
-public class AStar {
-	private QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>> agenda;
-	private EightPuzzle start;
-	private EightPuzzleSuccessorFunction sf = new EightPuzzleSuccessorFunction();
-	private ActionStatePair<PuzzleMove, EightPuzzle> node;
 
-	public AStar() {
-		super();
-	}
 
-	public ActionStatePair<PuzzleMove, EightPuzzle> Search() {
-		agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
-		start = EightPuzzle.randomEightPuzzle();
+public class AStar<ActionT,StateT> 
+{
+	
+	ActionStatePair<ActionT, StateT> node;
+	Queue<StateT> visited = new LinkedList<StateT>();
+	List<ActionStatePair<ActionT, StateT>> _successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
+	
+	
 
-		System.out.println(start);
-
-		EightPuzzle goal = EightPuzzle.orderedEightPuzzle();
-
-		System.out.println(goal);
-
-		// start.getSuccessor(start,list);
-		Queue<EightPuzzle> visited = new LinkedList<EightPuzzle>();
-		List<ActionStatePair<PuzzleMove, EightPuzzle>> _successors = new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>();
-		sf.getSuccessors(start, _successors);
-
+	
+	public ActionStatePair<ActionT, StateT> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda)
+	{
+		
+		successorFn.getSuccessors(start, _successors);
+	
 		visited.add(start);
 
-		for (ActionStatePair<PuzzleMove, EightPuzzle> node : _successors) {
-			// System.out.println(node);
+		for (ActionStatePair<ActionT, StateT> node : _successors) {
 			if (visited.contains(node.getState()) == false)
 				agenda.push(node);
 
-		}
+		}	
 		_successors.clear();
-		while (!agenda.isEmpty()) {
+		while (!agenda.isEmpty()) 
+		{
 			node = agenda.pop();
-			// System.out.println(node);
-			if (node.getState().equals(goal)) {
-
+			if (node.getState().equals(goal))
+			{
+								
 				return node;
-			} else {
-				sf.getSuccessors(node.getState(), _successors);
+			} 
+			else
+			{
+				successorFn.getSuccessors(node.getState(), _successors);
 				visited.add(node.getState());
-				for (ActionStatePair<PuzzleMove, EightPuzzle> suc : _successors) {
+				for (ActionStatePair<ActionT, StateT> suc : _successors)
+				{
 					if (visited.contains(suc.getState()) == false)
 						agenda.push(suc);
 				}
-
 			}
 			_successors.clear();
 		}
 		return node;
 	}
+
+
 }
