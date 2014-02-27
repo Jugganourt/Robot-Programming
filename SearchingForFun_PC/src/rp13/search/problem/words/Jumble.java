@@ -10,8 +10,6 @@ public class Jumble {
 
 
 /**
-
-
 	public enum PuzzleMove {
 		UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
 
