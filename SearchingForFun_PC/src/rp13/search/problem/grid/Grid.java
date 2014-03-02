@@ -5,14 +5,19 @@ import rp13.search.problem.grid.Grid.GridMove;
 public class Grid {
 	private int width = 77;
 	
-	private boolean[][] map = new boolean[77][77];
-	private int starti;//initial start position i
-	private int startj;//initial start position j
-	private int endi;//goal position i
-	private int endj;//goal position j
+	private static boolean[][] map = new boolean[77][77];
+	private static int starti;//initial start position i
+	private static int startj;//initial start position j
+	private static int endi;//goal position i
+	private static int endj;//goal position j
+	private int currenti;//current position i
+	private int currentj;//current position j
 	
 	
 	public Grid(){
+		
+		
+	
 		for(int i=0;i<width;i++)
 			for(int j=0;j<width;j++)
 				map[i][j]=false;
@@ -47,6 +52,16 @@ public class Grid {
 	public Grid(Grid _state) {
 		// TODO Auto-generated constructor stub
 	}
+	public static void setStart(int i,int j)
+	{
+		starti = i;
+		startj = j;
+	}
+	public static void setGoal(int i,int j)
+	{
+		endi= i;
+		endj=j;
+	}
 	public void addLink(int i,int j){
 		map[i][j]=true;
 	}
@@ -68,7 +83,11 @@ public class Grid {
 	
 	
 	public boolean isPossibleMove(GridMove move) {
+		return map[currenti][currentj];
+	}
+	
+	public static Grid createGrid(int i, int j) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 }

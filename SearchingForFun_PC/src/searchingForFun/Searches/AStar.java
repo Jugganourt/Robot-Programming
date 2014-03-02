@@ -7,7 +7,10 @@ import java.util.Queue;
 
 import rp13.search.interfaces.Agenda;
 import rp13.search.interfaces.SuccessorFunction;
+import rp13.search.problem.grid.Grid;
+import rp13.search.problem.grid.Grid.GridMove;
 import rp13.search.problem.puzzle.EightPuzzle;
+import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 import rp13.search.util.ActionStatePair;
 
 
@@ -56,6 +59,12 @@ public class AStar<ActionT,StateT>
 			_successors.clear();
 		}
 		return node;
+	}
+
+
+
+
+
 	}
 
 

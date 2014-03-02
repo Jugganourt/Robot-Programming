@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Nick Hawes
  * 
  */
-public class EightPuzzle {
+public class EightPuzzle{
 
 	/**
 	 * Explicit enumeration of moves the blank tile can take.
@@ -87,6 +87,20 @@ public class EightPuzzle {
 		m_blankPosition = m_board.length - 1;
 	}
 
+	public int heuristicNr()
+	{
+		int ct =0;
+		for(int i= 0;i<8;i++)
+		{
+			EightPuzzle goal = new EightPuzzle();
+			if(this.m_board[i]!=goal.m_board[i])
+				ct++;
+		
+		}
+		
+		return ct;
+	}
+	
 	/**
 	 * Create a new eight puzzle by copying the given puzzle
 	 * 
@@ -220,7 +234,8 @@ public class EightPuzzle {
 		return false;
 
 	}
-
+	
+	
 	/**
 	 * Creates an eight puzzle with the pieces in the correct order
 	 * 
@@ -252,6 +267,8 @@ public class EightPuzzle {
 		return randomEightPuzzle(WIDTH * WIDTH * WIDTH);
 	}
 
+
+	
 	public static void main(String[] args) {
 		
 		EightPuzzle puzzle = EightPuzzle.orderedEightPuzzle();

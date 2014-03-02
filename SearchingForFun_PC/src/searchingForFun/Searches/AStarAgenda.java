@@ -6,49 +6,53 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import rp13.search.interfaces.Agenda;
 import rp13.search.interfaces.SortedAgenda;
 
-public class AStarAgenda<ItemT extends Comparable<ItemT>> implements SortedAgenda {
+public class AStarAgenda<ItemT extends Comparable<ItemT>> implements SortedAgenda<ItemT>, Agenda<ItemT> {
 	
-	private ArrayList<ItemT> list = new ArrayList<ItemT>();
+	private Queue<ItemT> list = new LinkedList<ItemT>();
 
 	@Override
-	public void push(Object _item) {
-		// TODO Auto-generated method stub
+	public Iterator iterator() {
 		
+		return list.iterator();
 	}
 
 	@Override
-	public Object pop() {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemT pop() {
+		return list.poll();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		if(list.peek() == null)
+			return true;
+		else 
+			return false;
 	}
 
-	@Override
-	public boolean contains(Object _item) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public SearchNode<StateT, ActionT> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<SearchNode<StateT, ActionT>> agenda)
 	
+
 	@Override
 	public void sort() {
 		
-		java.util.Collections.sort(list);
+		
 	}
+
+	@Override
+	public void push(ItemT _item) {
+		list.add(_item);
+	}
+
+	@Override
+	public boolean contains(ItemT _item) {
+		return list.contains(_item);
+	}
+
+	
+	
+	
 	
 	
 
