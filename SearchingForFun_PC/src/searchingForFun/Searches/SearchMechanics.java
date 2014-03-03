@@ -22,6 +22,15 @@ public class SearchMechanics<ActionT,StateT>
 	public ActionStatePair<ActionT, StateT> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda)
 	{
 		
+		successorFn.getSuccessors(start, _successors);
+		visited.add(start);
+
+		for (ActionStatePair<ActionT, StateT> node : _successors) {
+			if (visited.contains(node.getState()) == false)
+				agenda.push(node);
+
+		}	
+		_successors.clear();
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
@@ -41,10 +50,15 @@ public class SearchMechanics<ActionT,StateT>
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_successors.clear();
 			
 =======
 >>>>>>> parent of ddcd883... GENERICS SORED
+=======
+			_successors.clear();
+			
+>>>>>>> 0a576a0fcfa8b591de172783f17c490b6a9de34b
 		}
 		return node;
 	}
