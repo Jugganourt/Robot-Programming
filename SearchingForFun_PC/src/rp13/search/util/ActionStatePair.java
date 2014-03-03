@@ -70,8 +70,4 @@ public class ActionStatePair<ActionT, StateT>  {
 		return sb.toString();
 	}
 
-	public ActionStatePair<ActionT,StateT> goBack() {
-		return this.getParent();
-		
-	}
 }

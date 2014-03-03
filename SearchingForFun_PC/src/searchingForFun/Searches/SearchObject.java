@@ -18,6 +18,7 @@ public class SearchObject {
 		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda2 = new StackClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 	
 		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> s = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda);
+		
 		for(int i = s.size()-1 ; i >= 0; i--){
 			ActionStatePair<PuzzleMove,EightPuzzle> x = s.get(i);
 			System.out.print(x.getAction()+ ", ");
