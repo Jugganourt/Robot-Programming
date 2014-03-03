@@ -23,7 +23,7 @@ public class SearchMechanics<ActionT,StateT>
 	
 	public Stack<ActionStatePair<ActionT, StateT>> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda)
 	{
-		
+		System.out.println(start);
 		successorFn.getSuccessors(start, _successors);
 		visited.add(start);
 
@@ -39,7 +39,8 @@ public class SearchMechanics<ActionT,StateT>
 			node = agenda.pop();
 			if (node.getState().equals(goal))
 			{
-				while(!node.getParent().getState().equals(start))
+				s.push(node);
+				while(node.getParent() != null)
 				{
 					s.push(node.getParent());
 					node = node.getParent();

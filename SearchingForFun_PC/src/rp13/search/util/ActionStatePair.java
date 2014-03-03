@@ -26,6 +26,7 @@ public class ActionStatePair<ActionT, StateT>  {
 	public ActionStatePair(ActionT _action, StateT _state) {
 		m_action = _action;
 		m_state = _state;
+		this.parent = null;
 	}
 	
 	public ActionStatePair<ActionT, StateT> getParent() {

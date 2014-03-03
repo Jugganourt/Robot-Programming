@@ -1,5 +1,7 @@
 package searchingForFun.Searches;
 
+import java.util.Stack;
+
 import rp13.search.interfaces.Agenda;
 import rp13.search.problem.puzzle.EightPuzzle;
 import rp13.search.problem.puzzle.EightPuzzleSuccessorFunction;
@@ -21,8 +23,17 @@ public class SearchObject {
 		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda2 = new StackClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 		
 
-		System.out.println(sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda));
+		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> s = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda);
+			for(ActionStatePair<PuzzleMove,EightPuzzle> x : s)
+				System.out.print(x.getAction() + ", ");
+			System.out.println();
+			System.out.println(EightPuzzle.orderedEightPuzzle());
 		System.out.println(sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2));
+			for(ActionStatePair<PuzzleMove,EightPuzzle> x : s)
+				System.out.print(x.getAction() + ", ");
+			System.out.println();
+			System.out.println(EightPuzzle.orderedEightPuzzle());
+		
 		//System.out.println(star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2));
 
 		//sm.doSearch(EightPuzzle.orderedEightPuzzle(), EightPuzzle.randomEightPuzzle(), sf, agenda);		
