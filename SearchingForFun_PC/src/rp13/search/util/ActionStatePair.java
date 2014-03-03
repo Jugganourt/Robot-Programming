@@ -3,16 +3,19 @@
  */
 package rp13.search.util;
 
+
+
 /**
  * A class to store an action and the state it has produced together.
  * 
  * @author nah
  * 
  */
-public class ActionStatePair<ActionT, StateT> {
+public class ActionStatePair<ActionT, StateT>  {
 
 	private final ActionT m_action;
 	private final StateT m_state;
+	private ActionStatePair<ActionT,StateT> parent;
 
 	/**
 	 * Construct the pair from input values.
@@ -24,6 +27,17 @@ public class ActionStatePair<ActionT, StateT> {
 		m_action = _action;
 		m_state = _state;
 	}
+	
+	public ActionStatePair<ActionT, StateT> getParent() {
+		return parent;
+	}
+
+
+	public void setParent(ActionStatePair<ActionT, StateT> parent) {
+		this.parent = parent;
+	}
+	
+	
 
 	/**
 	 * Get action.
@@ -53,5 +67,10 @@ public class ActionStatePair<ActionT, StateT> {
 		}
 
 		return sb.toString();
+	}
+
+	public ActionStatePair<ActionT,StateT> goBack() {
+		return this.getParent();
+		
 	}
 }
