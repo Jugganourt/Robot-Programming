@@ -5,22 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
-
 import rp13.search.interfaces.Agenda;
 import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.util.ActionStatePair;
 
-
 public class SearchMechanics<ActionT,StateT> 
 {
-	
 	ActionStatePair<ActionT, StateT> node;
 	ActionStatePair<ActionT, StateT> parent;
 	Queue<StateT> visited = new LinkedList<StateT>();
 	Stack<ActionStatePair<ActionT,StateT>> s = new Stack<ActionStatePair<ActionT,StateT>>();
 	List<ActionStatePair<ActionT, StateT>> _successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
 		
-	
 	public Stack<ActionStatePair<ActionT, StateT>> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda)
 	{
 		System.out.println(start);
@@ -28,12 +24,12 @@ public class SearchMechanics<ActionT,StateT>
 		visited.add(start);
 
 		for (ActionStatePair<ActionT, StateT> node : _successors) {
-			
-			if (visited.contains(node.getState()) == false)
+			if (visited.contains(node.getState()) == false){
 				agenda.push(node);
-
+			}
 		}	
 		_successors.clear();
+		
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
@@ -63,13 +59,6 @@ public class SearchMechanics<ActionT,StateT>
 			
 			
 		}
-		return s;
-	}
-	
-	
-	
-	
-	
-	
-	
+		return null;
+	}		
 }
