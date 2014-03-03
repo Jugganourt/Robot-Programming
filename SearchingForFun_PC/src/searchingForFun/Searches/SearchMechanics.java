@@ -51,10 +51,15 @@ public class SearchMechanics<ActionT,StateT>
 			}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			_successors.clear();
 			
 =======
 >>>>>>> parent of ddcd883... GENERICS SORED
+=======
+			_successors.clear();
+			
+>>>>>>> 0a576a0fcfa8b591de172783f17c490b6a9de34b
 =======
 			_successors.clear();
 			
