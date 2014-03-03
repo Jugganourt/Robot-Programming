@@ -1,6 +1,6 @@
 package rp13.search.problem.words;
 
-public class Jumble {
+public interface Jumble {
 	
 	
 	String str[] = new String[100];
@@ -9,7 +9,7 @@ public class Jumble {
 }
 
 
-/**
+
 	public enum PuzzleMove {
 		UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
 
@@ -24,9 +24,10 @@ public class Jumble {
 		 */
 		private static final PuzzleMove[] VALUES = values();
 
-		/***
+		/**
 		 * Count of values in list
 		 */
+		
 		private static final int SIZE = VALUES.length;
 
 		/**
@@ -95,4 +96,3 @@ public class Jumble {
 		}
 	}
 
-*/

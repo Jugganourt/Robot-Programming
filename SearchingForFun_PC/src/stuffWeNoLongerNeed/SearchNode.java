@@ -1,4 +1,4 @@
-package searchingForFun.Searches;
+package stuffWeNoLongerNeed;
 
 public class SearchNode<ActionT,StateT> {
 	

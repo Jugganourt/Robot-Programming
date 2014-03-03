@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 import rp13.search.interfaces.SortedAgenda;
+import stuffWeNoLongerNeed.SearchNode;
 
 public class AStarAgenda<ItemT extends Comparable<ItemT>> implements SortedAgenda {
 	
