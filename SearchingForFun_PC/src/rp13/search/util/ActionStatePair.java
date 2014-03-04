@@ -3,6 +3,8 @@
  */
 package rp13.search.util;
 
+import rp13.search.problem.puzzle.States;
+
 
 
 /**
@@ -11,11 +13,13 @@ package rp13.search.util;
  * @author nah
  * 
  */
-public class ActionStatePair<ActionT, StateT>  {
+public class ActionStatePair<ActionT, StateT extends States<StateT>>  implements Comparable<ActionStatePair<ActionT, StateT >> {
 
 	private final ActionT m_action;
 	private final StateT m_state;
 	private ActionStatePair<ActionT,StateT> parent;
+	private int heur;
+	
 
 	/**
 	 * Construct the pair from input values.
@@ -32,6 +36,7 @@ public class ActionStatePair<ActionT, StateT>  {
 	public ActionStatePair<ActionT, StateT> getParent() {
 		return parent;
 	}
+	
 
 
 	public void setParent(ActionStatePair<ActionT, StateT> parent) {
@@ -70,4 +75,28 @@ public class ActionStatePair<ActionT, StateT>  {
 		return sb.toString();
 	}
 
+<<<<<<< HEAD
+=======
+	public ActionStatePair<ActionT,StateT> goBack() {
+		return this.getParent();
+		
+	}
+
+	@Override
+	public int compareTo(ActionStatePair<ActionT, StateT> arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getHeur() {
+		
+		return heur;
+	}
+
+	public void setHeur(int heur) {
+		this.heur = heur;
+	}
+
+	
+>>>>>>> 0c99286fad7bd1565d7a4edd3933a5227eae4321
 }

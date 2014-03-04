@@ -32,6 +32,7 @@ public class GridSuccessorFunction implements SuccessorFunction<GridMove,Grid>
 				Grid successor = new Grid(_state);
 				// apply the move
 				successor.makeMove(move);
+				
 				// store the move and action together in a pair and add to
 				// successor list
 				_successors

@@ -15,6 +15,7 @@ public class SearchObject {
 
 	public static void main(String[] args){
 		
+<<<<<<< HEAD
 //		SearchMechanics<PuzzleMove, EightPuzzle > sm = new SearchMechanics<>();
 //		AStar<PuzzleMove, EightPuzzle> star = new AStar<PuzzleMove, EightPuzzle>();
 //		EightPuzzleSuccessorFunction sf = new EightPuzzleSuccessorFunction();
@@ -22,6 +23,17 @@ public class SearchObject {
 //		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda2 = new StackClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 	
 		/** BFS PUZZLE
+=======
+		
+		SearchMechanics<PuzzleMove, EightPuzzle > sm = new SearchMechanics<>();
+		
+		AStar<PuzzleMove, EightPuzzle> star = new AStar<PuzzleMove, EightPuzzle>();
+		EightPuzzleSuccessorFunction sf = new EightPuzzleSuccessorFunction();
+		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda = new QueueClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
+		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda2 = new StackClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
+		System.out.println("goal:");
+		System.out.println(star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2));
+>>>>>>> 0c99286fad7bd1565d7a4edd3933a5227eae4321
 		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> s = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda);
 		
 		for(int i = s.size()-1 ; i >= 0; i--){
@@ -37,6 +49,7 @@ public class SearchObject {
 			System.out.print(x.getAction()+ ", ");
 		}
 		System.out.println(); */
+		
 		
 		//System.out.println(star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2));
 

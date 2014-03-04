@@ -24,6 +24,7 @@ public class EightPuzzleSuccessorFunction implements
 	 * moves.
 	 * 
 	 */
+	
 	@Override
 	public void getSuccessors(EightPuzzle _state,
 			List<ActionStatePair<PuzzleMove, EightPuzzle>> _successors) {
@@ -41,11 +42,14 @@ public class EightPuzzleSuccessorFunction implements
 				EightPuzzle successor = new EightPuzzle(_state);
 				// apply the move
 				successor.makeMove(move);
+				
+				
 				// store the move and action together in a pair and add to
 				// successor list
 				_successors
 						.add(new ActionStatePair<EightPuzzle.PuzzleMove, EightPuzzle>(
 								move, successor));
+				
 			}
 
 		}
