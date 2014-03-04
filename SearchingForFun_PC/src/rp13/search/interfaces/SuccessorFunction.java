@@ -7,6 +7,8 @@ package rp13.search.interfaces;
 import java.util.List;
 
 
+
+import rp13.search.problem.puzzle.States;
 import rp13.search.util.ActionStatePair;
 
 /**
@@ -17,7 +19,7 @@ import rp13.search.util.ActionStatePair;
  * @author Nick Hawes
  * 
  */
-public interface SuccessorFunction<ActionT, StateT> {
+public interface SuccessorFunction <ActionT, StateT extends States<StateT>> {
 
 	/**
 	 * Adds each successor of the given state to the end of the _successors

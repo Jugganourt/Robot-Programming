@@ -1,7 +1,10 @@
 package rp13.search.problem.words;
 
 
-public class Jumble {
+import rp13.search.problem.puzzle.States;
+
+
+public class Jumble implements States<Jumble> {
 	
 	private char[] word;
 	
@@ -51,6 +54,12 @@ public class Jumble {
 	
 	public String toString(){
 		return word.toString();
+	}
+
+	@Override
+	public int heuristic() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

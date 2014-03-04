@@ -6,7 +6,6 @@ import rp13.search.util.ActionStatePair;
 
 public class JumbleSuccessorFunction implements SuccessorFunction<StringMove, Jumble> {
 
-	@Override
 	public void getSuccessors(Jumble _state, List<ActionStatePair<StringMove, Jumble>> _successors) {
 		for(int i = 0; i < _state.arrayLength(); i++ ){
 			for (int j = i; j < _state.arrayLength(); j++) {

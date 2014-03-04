@@ -75,8 +75,7 @@ public class ActionStatePair<ActionT, StateT extends States<StateT>>  implements
 		return sb.toString();
 	}
 
-<<<<<<< HEAD
-=======
+
 	public ActionStatePair<ActionT,StateT> goBack() {
 		return this.getParent();
 		
@@ -98,5 +97,4 @@ public class ActionStatePair<ActionT, StateT extends States<StateT>>  implements
 	}
 
 	
->>>>>>> 0c99286fad7bd1565d7a4edd3933a5227eae4321
 }

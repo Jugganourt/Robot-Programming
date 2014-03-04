@@ -15,7 +15,7 @@ public class SearchObject {
 
 	public static void main(String[] args){
 		
-<<<<<<< HEAD
+
 //		SearchMechanics<PuzzleMove, EightPuzzle > sm = new SearchMechanics<>();
 //		AStar<PuzzleMove, EightPuzzle> star = new AStar<PuzzleMove, EightPuzzle>();
 //		EightPuzzleSuccessorFunction sf = new EightPuzzleSuccessorFunction();
