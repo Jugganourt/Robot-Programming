@@ -24,15 +24,22 @@ public class SearchMechanics<ActionT,StateT>
 		visited.add(start);
 
 		for (ActionStatePair<ActionT, StateT> node : _successors) {
-			if (visited.contains(node.getState()) == false){
+			System.out.println("Testing if in contained");
+			if (!visited.contains(node.getState())){
 				agenda.push(node);
 			}
 		}	
+		
+		System.out.println("Before start agenda");
+		for(ActionStatePair<ActionT,StateT> test: agenda) System.out.println("Agenda: " + test.getState());
+		System.out.println("After");
+		
 		_successors.clear();
 		
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
+			System.out.println(node);
 			if (node.getState().equals(goal))
 			{
 				s.push(node);
@@ -45,7 +52,7 @@ public class SearchMechanics<ActionT,StateT>
 			} 
 			else
 			{
-				successorFn.getSuccessors(node.getState(), _successors);
+				successorFn.getSuccessors(node.getState(), _successors);				
 				visited.add(node.getState());
 				for (ActionStatePair<ActionT, StateT> suc : _successors)
 				{
