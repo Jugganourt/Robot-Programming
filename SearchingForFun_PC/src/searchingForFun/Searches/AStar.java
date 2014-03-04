@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 import rp13.search.interfaces.Agenda;
 import rp13.search.interfaces.SuccessorFunction;
@@ -19,8 +20,9 @@ public class AStar<ActionT, StateT extends States<StateT>> {
 
 	List<ActionStatePair<ActionT, StateT>> _successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
 	PriorityQueue<ActionStatePair<ActionT, StateT>> sortedSuccessors;
+	Stack<ActionStatePair<ActionT,StateT>> s = new Stack<ActionStatePair<ActionT,StateT>>();
 
-	public ActionStatePair<ActionT, StateT> doSearch(StateT start, StateT goal,
+	public Stack<ActionStatePair<ActionT, StateT>> doSearch(StateT start, StateT goal,
 			SuccessorFunction<ActionT, StateT> successorFn,
 			Agenda<ActionStatePair<ActionT, StateT>> agenda) {
 
@@ -41,7 +43,7 @@ public class AStar<ActionT, StateT extends States<StateT>> {
 
 				});
 		successorFn.getSuccessors(start, _successors);
-		
+
 		visited.add(start);
 		System.out.println("start");
 		System.out.println(start);
@@ -50,8 +52,8 @@ public class AStar<ActionT, StateT extends States<StateT>> {
 			node.setHeur(node.getState().heuristic());
 			sortedSuccessors.add(node);
 		}
-		//System.out.println("firstsuccessors");
-		//System.out.println(sortedSuccessors);
+		// System.out.println("firstsuccessors");
+		// System.out.println(sortedSuccessors);
 		while (visited.contains(sortedSuccessors.peek().getState()))
 			sortedSuccessors.poll();
 
@@ -59,27 +61,28 @@ public class AStar<ActionT, StateT extends States<StateT>> {
 
 		sortedSuccessors.clear();
 		_successors.clear();
-		/*System.out.println("agenda");
-		for (ActionStatePair<ActionT, StateT> element : agenda) {
-			System.out.print(element.getState());
-		}
-		*/
+		/*
+		 * System.out.println("agenda"); for (ActionStatePair<ActionT, StateT>
+		 * element : agenda) { System.out.print(element.getState()); }
+		 */
 		while (!agenda.isEmpty()) {
 			node = agenda.pop();
-			if (node.getState().equals(goal)) 
-			{
-
-				return node;
-			} else 
-			{
+			if (node.getState().equals(goal)) {
+				s.push(node);
+				while(node.getParent() != null)
+				{
+					s.push(node.getParent());
+					node = node.getParent();
+				}
+				return s;
+			} else {
 				successorFn.getSuccessors(node.getState(), _successors);
 				visited.add(node.getState());
-				//System.out.println(node.getState());
-				for (ActionStatePair<ActionT, StateT> node : _successors) 
-				{
-					node.setHeur(node.getState().heuristic());
-					sortedSuccessors.add(node);
-
+				// System.out.println(node.getState());
+				for (ActionStatePair<ActionT, StateT> suc : _successors) {
+					suc.setHeur(suc.getState().heuristic());
+					sortedSuccessors.add(suc);
+					suc.setParent(node);
 				}
 
 				while (visited.contains(sortedSuccessors.peek().getState()))
@@ -87,11 +90,10 @@ public class AStar<ActionT, StateT extends States<StateT>> {
 
 				agenda.push(sortedSuccessors.peek());
 
-				
 			}
 			_successors.clear();
 			sortedSuccessors.clear();
 		}
-		return node;
+		return null;
 	}
 }
