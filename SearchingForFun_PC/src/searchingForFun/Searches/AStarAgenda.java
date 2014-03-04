@@ -43,9 +43,7 @@ public class AStarAgenda<ItemT extends Comparable<ItemT>> implements SortedAgend
 		return null;
 	}
 
-	public SearchNode<StateT, ActionT> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<SearchNode<StateT, ActionT>> agenda){
-		
-	}
+	
 	
 	@Override
 	public void sort() {

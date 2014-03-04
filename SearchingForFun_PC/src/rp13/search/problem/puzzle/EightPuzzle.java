@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Nick Hawes
  * 
  */
-public class EightPuzzle {
+public class EightPuzzle implements States<EightPuzzle>{
 
 	/**
 	 * Explicit enumeration of moves the blank tile can take.
@@ -157,7 +157,20 @@ public class EightPuzzle {
 			return false;
 		}
 	}
-
+	
+	public int heuristic()
+	{
+		EightPuzzle order = EightPuzzle.orderedEightPuzzle();
+		int ct= 0;
+		for(int i=0;i<this.m_board.length;i++)
+			if(this.m_board[i]!=order.m_board[i])
+				ct++;
+		
+		return ct;
+		
+		
+	}
+	
 	@Override
 	public String toString() {
 
