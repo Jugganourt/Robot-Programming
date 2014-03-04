@@ -53,7 +53,14 @@ public class Jumble implements States<Jumble> {
 	}
 	
 	public String toString(){
-		return word.toString();
+		
+		String w = "";
+		for(int i = 0; i < word.length; i ++){
+			w = w + word[i];
+		}
+		
+				
+		return w;
 	}
 
 	@Override

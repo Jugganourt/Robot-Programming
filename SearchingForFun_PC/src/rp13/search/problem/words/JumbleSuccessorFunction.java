@@ -12,7 +12,7 @@ public class JumbleSuccessorFunction implements SuccessorFunction<StringMove, Ju
 				if(i != j){
 					StringMove temp = new StringMove(i,j);
 					
-					Jumble stateSuc = new Jumble(_state.getCharArray().toString());
+					Jumble stateSuc = new Jumble(_state.getCharArray());
 					stateSuc.executeMove(temp);
 					_successors.add(new ActionStatePair<StringMove, Jumble>(temp, stateSuc));
 				}

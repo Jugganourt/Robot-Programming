@@ -25,6 +25,7 @@ public class SearchMechanics<ActionT,StateT extends States<StateT>>
 		
 		successorFn.getSuccessors(start, _successors);
 		visited.add(start);
+		System.out.println(_successors);
 
 		for (ActionStatePair<ActionT, StateT> node : _successors) {
 			if (!visited.contains(node.getState())){
@@ -32,12 +33,17 @@ public class SearchMechanics<ActionT,StateT extends States<StateT>>
 			}
 		}	
 		
+		System.out.println("Before start agenda");
+		for(ActionStatePair<ActionT,StateT> test: agenda) System.out.println("Agenda: " + test.getState());
+		System.out.println("After");
 		
 		_successors.clear();
 		
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
+			System.out.println(node);
+			
 			if (node.getState().equals(goal))
 			{
 				s.push(node);

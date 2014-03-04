@@ -15,16 +15,17 @@ import rp13.search.util.ActionStatePair;
 
 public class AStar<ActionT, StateT extends States<StateT>> {
 
+	
 	ActionStatePair<ActionT, StateT> node;
+	ActionStatePair<ActionT, StateT> parent;
 	Queue<StateT> visited = new LinkedList<StateT>();
-
-	List<ActionStatePair<ActionT, StateT>> _successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
-	PriorityQueue<ActionStatePair<ActionT, StateT>> sortedSuccessors;
 	Stack<ActionStatePair<ActionT,StateT>> s = new Stack<ActionStatePair<ActionT,StateT>>();
+	List<ActionStatePair<ActionT, StateT>> _successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
+	
+	PriorityQueue<ActionStatePair<ActionT, StateT>> sortedSuccessors;
 
-	public Stack<ActionStatePair<ActionT, StateT>> doSearch(StateT start, StateT goal,
-			SuccessorFunction<ActionT, StateT> successorFn,
-			Agenda<ActionStatePair<ActionT, StateT>> agenda) {
+	
+	public Stack<ActionStatePair<ActionT, StateT>> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda) {
 
 		sortedSuccessors = new PriorityQueue<ActionStatePair<ActionT, StateT>>(
 				100, new Comparator<ActionStatePair<ActionT, StateT>>() {

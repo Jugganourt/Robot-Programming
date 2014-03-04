@@ -1,8 +1,8 @@
 package rp13.search.problem.grid;
 
-import rp13.search.problem.grid.Grid.GridMove;
+import rp13.search.problem.puzzle.States;
 
-public class Grid {
+public class Grid implements States<Grid> {
 	private int width = 77;
 	
 	private boolean[][] map = new boolean[77][77];
@@ -70,5 +70,10 @@ public class Grid {
 	public boolean isPossibleMove(GridMove move) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public int heuristic() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

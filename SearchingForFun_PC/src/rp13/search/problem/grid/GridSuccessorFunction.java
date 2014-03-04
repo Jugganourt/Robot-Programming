@@ -11,7 +11,7 @@ import rp13.search.util.ActionStatePair;
 
 public class GridSuccessorFunction implements SuccessorFunction<GridMove,Grid>
 {
-
+	
 	@Override
 	public void getSuccessors(Grid _state,
 			List<ActionStatePair<GridMove, Grid>> _successors) 
