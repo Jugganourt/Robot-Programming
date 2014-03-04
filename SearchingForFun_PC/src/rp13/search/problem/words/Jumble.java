@@ -1,6 +1,5 @@
 package rp13.search.problem.words;
 
-
 import rp13.search.problem.puzzle.States;
 
 
@@ -53,16 +52,31 @@ public class Jumble implements States<Jumble> {
 	}
 	
 	public String toString(){
-		
 		String w = "";
-		for(int i = 0; i < word.length; i ++){
+		for (int i = 0; i < word.length; i++) {
 			w = w + word[i];
+			
 		}
 		
-				
 		return w;
 	}
 
+	public static void main(String[] args){
+		
+		Jumble jj = new Jumble("java");
+		
+		System.out.println(jj);
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public int heuristic() {
 		// TODO Auto-generated method stub

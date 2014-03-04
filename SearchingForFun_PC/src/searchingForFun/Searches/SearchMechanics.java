@@ -17,32 +17,31 @@ public class SearchMechanics<ActionT,StateT extends States<StateT>>
 	ActionStatePair<ActionT, StateT> parent;
 	Queue<StateT> visited = new LinkedList<StateT>();
 	Stack<ActionStatePair<ActionT,StateT>> s = new Stack<ActionStatePair<ActionT,StateT>>();
-	List<ActionStatePair<ActionT, StateT>> _successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
+	List<ActionStatePair<ActionT, StateT>> successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
 		
 	public Stack<ActionStatePair<ActionT, StateT>> doSearch(StateT start, StateT goal, SuccessorFunction<ActionT, StateT> successorFn, Agenda<ActionStatePair<ActionT, StateT>> agenda)
 	{
 		System.out.println(start);
 		
-		successorFn.getSuccessors(start, _successors);
+		successorFn.getSuccessors(start, successors);
 		visited.add(start);
-		System.out.println(_successors);
 
-		for (ActionStatePair<ActionT, StateT> node : _successors) {
-			if (!visited.contains(node.getState())){
-				agenda.push(node);
+		for (ActionStatePair<ActionT, StateT> suc : successors) {
+			if (!visited.contains(suc.getState())){
+				agenda.push(suc);
 			}
 		}	
 		
 		System.out.println("Before start agenda");
-		for(ActionStatePair<ActionT,StateT> test: agenda) System.out.println("Agenda: " + test.getState());
+		for(ActionStatePair<ActionT,StateT> test: agenda) System.out.println("Agenda: " + test);
 		System.out.println("After");
 		
-		_successors.clear();
+		successors.clear();
 		
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
-			System.out.println(node);
+			System.out.println(node.getState());
 			
 			if (node.getState().equals(goal))
 			{
@@ -56,9 +55,9 @@ public class SearchMechanics<ActionT,StateT extends States<StateT>>
 			} 
 			else
 			{
-				successorFn.getSuccessors(node.getState(), _successors);				
+				successorFn.getSuccessors(node.getState(), successors);				
 				visited.add(node.getState());
-				for (ActionStatePair<ActionT, StateT> suc : _successors)
+				for (ActionStatePair<ActionT, StateT> suc : successors)
 				{
 					
 					suc.setParent(node);
@@ -66,7 +65,7 @@ public class SearchMechanics<ActionT,StateT extends States<StateT>>
 						agenda.push(suc);
 				}
 			}
-			_successors.clear();
+			successors.clear();
 			
 			
 		}

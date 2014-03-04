@@ -46,17 +46,16 @@ public class SearchObject {
 			System.out.print(x.getAction()+ ", ");
 		}
 		System.out.println(); */
-	
-				
 		
 		SearchMechanics<StringMove, Jumble > jumble = new SearchMechanics<>();
 		JumbleSuccessorFunction sfJ = new JumbleSuccessorFunction();
 		Agenda<ActionStatePair<StringMove, Jumble>> agendaJ = new QueueClass<ActionStatePair<StringMove, Jumble>>();
 		Stack<ActionStatePair<StringMove, Jumble>> v = jumble.doSearch(new Jumble("mot") , new Jumble("tom") , sfJ, agendaJ);
-		for(int i = v.size()-1 ; i >= 0; i--){
-			ActionStatePair<StringMove, Jumble> x = v.get(i);
-			System.out.print(x.getAction()+ ", "); 
-		}
+		//for(int i = 1 ; i >= 0; i--){
+			//ActionStatePair<StringMove, Jumble> x = v.get(i);
+			//System.out.print(x.getState()+ ", "); 
+		System.out.println(v);
+		//}
 	}
 
 }

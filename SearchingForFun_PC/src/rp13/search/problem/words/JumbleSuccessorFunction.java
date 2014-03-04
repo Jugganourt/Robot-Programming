@@ -6,17 +6,22 @@ import rp13.search.util.ActionStatePair;
 
 public class JumbleSuccessorFunction implements SuccessorFunction<StringMove, Jumble> {
 
-	public void getSuccessors(Jumble _state, List<ActionStatePair<StringMove, Jumble>> _successors) {
-		for(int i = 0; i < _state.arrayLength(); i++ ){
-			for (int j = i; j < _state.arrayLength(); j++) {
-				if(i != j){
-					StringMove temp = new StringMove(i,j);
+	@Override
+	public void getSuccessors(Jumble state, List<ActionStatePair<StringMove, Jumble>> successors) {
+			
+		for(int i = 0; i < state.arrayLength(); i++ ){
+			for (int j = i+1; j < state.arrayLength(); j++) {
+			
 					
-					Jumble stateSuc = new Jumble(_state.getCharArray());
-					stateSuc.executeMove(temp);
-					_successors.add(new ActionStatePair<StringMove, Jumble>(temp, stateSuc));
-				}
+					StringMove temp = new StringMove(i,j);
+					Jumble copy = state;
+					copy.executeMove(temp);
+					System.out.println(copy);
+					successors.add(i, new ActionStatePair<StringMove, Jumble>(temp, copy));
+					
 			}
+			
 		}
+		System.out.println(successors);
 	}
 }
