@@ -30,18 +30,12 @@ public class SearchMechanics<ActionT,StateT extends States<StateT>>
 			if (!visited.contains(suc.getState())){
 				agenda.push(suc);
 			}
-		}	
-		
-		System.out.println("Before start agenda");
-		for(ActionStatePair<ActionT,StateT> test: agenda) System.out.println("Agenda: " + test);
-		System.out.println("After");
-		
+		}		
 		successors.clear();
 		
 		while (!agenda.isEmpty()) 
 		{
 			node = agenda.pop();
-			System.out.println(node.getState());
 			
 			if (node.getState().equals(goal))
 			{

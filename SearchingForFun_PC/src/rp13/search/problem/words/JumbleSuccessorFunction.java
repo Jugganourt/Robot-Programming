@@ -8,20 +8,18 @@ public class JumbleSuccessorFunction implements SuccessorFunction<StringMove, Ju
 
 	@Override
 	public void getSuccessors(Jumble state, List<ActionStatePair<StringMove, Jumble>> successors) {
-			
+			assert(successors != null);
 		for(int i = 0; i < state.arrayLength(); i++ ){
 			for (int j = i+1; j < state.arrayLength(); j++) {
 			
 					
 					StringMove temp = new StringMove(i,j);
-					Jumble copy = state;
+					Jumble copy = new Jumble(state.toString());
 					copy.executeMove(temp);
-					System.out.println(copy);
-					successors.add(i, new ActionStatePair<StringMove, Jumble>(temp, copy));
+					successors.add(new ActionStatePair<StringMove, Jumble>(temp, copy));
 					
 			}
 			
 		}
-		System.out.println(successors);
 	}
 }
