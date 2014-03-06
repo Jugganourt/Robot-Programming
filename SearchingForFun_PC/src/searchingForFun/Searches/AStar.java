@@ -46,7 +46,6 @@ public class AStar<ActionT, StateT extends States<StateT>> {
 		successorFn.getSuccessors(start, _successors);
 
 		visited.add(start);
-		System.out.println("start");
 		System.out.println(start);
 
 		for (ActionStatePair<ActionT, StateT> node : _successors) {

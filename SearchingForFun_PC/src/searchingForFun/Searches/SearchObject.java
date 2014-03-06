@@ -25,6 +25,8 @@ public class SearchObject {
 		SearchMechanics<StringMove, Jumble > jumble = new SearchMechanics<>();
 		JumbleSuccessorFunction sfJ = new JumbleSuccessorFunction();
 		Agenda<ActionStatePair<StringMove, Jumble>> agendaJ = new QueueClass<ActionStatePair<StringMove, Jumble>>();
+		Agenda<ActionStatePair<StringMove, Jumble>> agendaJ2 = new StackClass<ActionStatePair<StringMove, Jumble>>();
+		AStar<StringMove, Jumble> starJ = new AStar<StringMove, Jumble>();
 
 	
 		
@@ -36,13 +38,13 @@ public class SearchObject {
 		}
 		System.out.println();
 		
-		 //DFS PUZZLE QUIZ
+		/** //DFS PUZZLE QUIZ
 		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> t = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
 		for(int i = t.size()-1 ; i >= 0; i--){
 			ActionStatePair<PuzzleMove,EightPuzzle> x = t.get(i);
 			System.out.print(x.getAction()+ ", ");
 		}
-		System.out.println(); 
+		System.out.println(); */
 		
 		//A* PUZZEL QUIZ
 		Stack<ActionStatePair<PuzzleMove, EightPuzzle>> u = star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
@@ -56,6 +58,12 @@ public class SearchObject {
 		for(int i = 0 ; i >= 0; i--){
 			ActionStatePair<StringMove, Jumble> x = v.get(i);
 			System.out.print(x.getState()+ ", "); 
+		}
+		System.out.println(); 
+		Stack<ActionStatePair<StringMove, Jumble>> y = starJ.doSearch(new Jumble("idefnr") , new Jumble("friend") , sfJ, agendaJ2);
+		for(int i = 0 ; i >= 0; i--){
+			ActionStatePair<StringMove, Jumble> z = y.get(i);
+			System.out.print(z.getState()+ ", "); 
 		}
 	}
 }
