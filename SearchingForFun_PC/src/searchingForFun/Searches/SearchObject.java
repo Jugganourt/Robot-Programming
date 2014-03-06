@@ -23,47 +23,52 @@ public class SearchObject {
 		Agenda<ActionStatePair<PuzzleMove, EightPuzzle>> agenda2 = new StackClass<ActionStatePair<PuzzleMove, EightPuzzle>>();
 		
 		SearchMechanics<StringMove, Jumble > jumble = new SearchMechanics<>();
+		SearchMechanics<StringMove, Jumble > jumbleB = new SearchMechanics<>(); // used for the DFS because of strange duplication error 
 		JumbleSuccessorFunction sfJ = new JumbleSuccessorFunction();
 		Agenda<ActionStatePair<StringMove, Jumble>> agendaJ = new QueueClass<ActionStatePair<StringMove, Jumble>>();
 		Agenda<ActionStatePair<StringMove, Jumble>> agendaJ2 = new StackClass<ActionStatePair<StringMove, Jumble>>();
 		AStar<StringMove, Jumble> starJ = new AStar<StringMove, Jumble>();
 
 	
-		
+		/** 
 		//BFS PUZZLE QUIZ
-		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> s = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda);
+		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> a = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda);
 		for(int i = s.size()-1 ; i >= 0; i--){
-			ActionStatePair<PuzzleMove,EightPuzzle> x = s.get(i);
+			ActionStatePair<PuzzleMove,EightPuzzle> x = a.get(i);
 			System.out.print(x.getAction()+ ", ");
 		}
 		System.out.println();
 		
-		/** //DFS PUZZLE QUIZ
-		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> t = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
+		//DFS PUZZLE QUIZ
+		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> b = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
 		for(int i = t.size()-1 ; i >= 0; i--){
-			ActionStatePair<PuzzleMove,EightPuzzle> x = t.get(i);
+			ActionStatePair<PuzzleMove,EightPuzzle> x = b.get(i);
+			System.out.print(x.getAction()+ ", ");
+		}
+		System.out.println(); 
+		
+		//A* PUZZEL QUIZ
+		Stack<ActionStatePair<PuzzleMove, EightPuzzle>> c = star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
+		for(int i = u.size()-1 ; i >= 0; i--){
+			ActionStatePair<PuzzleMove,EightPuzzle> x = c.get(i);
 			System.out.print(x.getAction()+ ", ");
 		}
 		System.out.println(); */
 		
-		//A* PUZZEL QUIZ
-		Stack<ActionStatePair<PuzzleMove, EightPuzzle>> u = star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
-		for(int i = u.size()-1 ; i >= 0; i--){
-			ActionStatePair<PuzzleMove,EightPuzzle> x = u.get(i);
-			System.out.print(x.getAction()+ ", ");
-		}
+		
+		///**
+		Stack<ActionStatePair<StringMove, Jumble>> d = jumble.doSearch(new Jumble("ollhe") , new Jumble("hello") , sfJ, agendaJ);
+		System.out.println(d.get(0).getState());
+		System.out.println(); 
+		System.out.println(); //*/
+		
+		Stack<ActionStatePair<StringMove, Jumble>> e = jumbleB.doSearch(new Jumble("gmica") , new Jumble("magic") , sfJ, agendaJ2);
+		System.out.println(e.get(0).getState());
+		System.out.println();
 		System.out.println(); 
 		
-		Stack<ActionStatePair<StringMove, Jumble>> v = jumble.doSearch(new Jumble("ollhe") , new Jumble("hello") , sfJ, agendaJ);
-		for(int i = 0 ; i >= 0; i--){
-			ActionStatePair<StringMove, Jumble> x = v.get(i);
-			System.out.print(x.getState()+ ", "); 
-		}
-		System.out.println(); 
-		Stack<ActionStatePair<StringMove, Jumble>> y = starJ.doSearch(new Jumble("idefnr") , new Jumble("friend") , sfJ, agendaJ2);
-		for(int i = 0 ; i >= 0; i--){
-			ActionStatePair<StringMove, Jumble> z = y.get(i);
-			System.out.print(z.getState()+ ", "); 
-		}
+	
+		Stack<ActionStatePair<StringMove, Jumble>> f = starJ.doSearch(new Jumble("idefnr") , new Jumble("friend") , sfJ, agendaJ2);
+		System.out.println(f.get(0).getState());
 	}
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="6" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="41" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="41" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+      <class name="test.MyTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:test.MyTest@24389c]" name="setUp" is-config="true" duration-ms="6" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testAStarJumble()[pri:0, instance:test.MyTest@24389c]" name="testAStarJumble" duration-ms="21" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAStarJumble -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:test.MyTest@24389c]" name="setUp" is-config="true" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testAStarPuzzle()[pri:0, instance:test.MyTest@24389c]" name="testAStarPuzzle" duration-ms="1" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAStarPuzzle -->
+        <test-method status="PASS" signature="testBFSJumble()[pri:0, instance:test.MyTest@24389c]" name="testBFSJumble" duration-ms="1" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBFSJumble -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:test.MyTest@24389c]" name="setUp" is-config="true" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testBFSPuzzle()[pri:0, instance:test.MyTest@24389c]" name="testBFSPuzzle" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBFSPuzzle -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:test.MyTest@24389c]" name="setUp" is-config="true" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testDFSJumble()[pri:0, instance:test.MyTest@24389c]" name="testDFSJumble" duration-ms="1" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDFSJumble -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:test.MyTest@24389c]" name="setUp" is-config="true" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testDFSPuzzle()[pri:0, instance:test.MyTest@24389c]" name="testDFSPuzzle" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDFSPuzzle -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:test.MyTest@24389c]" name="setUp" is-config="true" duration-ms="0" started-at="2014-03-06T01:06:41Z" finished-at="2014-03-06T01:06:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+      </class> <!-- test.MyTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
