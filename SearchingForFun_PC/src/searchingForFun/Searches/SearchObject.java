@@ -30,10 +30,10 @@ public class SearchObject {
 		AStar<StringMove, Jumble> starJ = new AStar<StringMove, Jumble>();
 
 	
-		/** 
+		/**
 		//BFS PUZZLE QUIZ
 		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> a = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda);
-		for(int i = s.size()-1 ; i >= 0; i--){
+		for(int i = a.size()-1 ; i >= 0; i--){
 			ActionStatePair<PuzzleMove,EightPuzzle> x = a.get(i);
 			System.out.print(x.getAction()+ ", ");
 		}
@@ -41,7 +41,7 @@ public class SearchObject {
 		
 		//DFS PUZZLE QUIZ
 		Stack<ActionStatePair<PuzzleMove,EightPuzzle>> b = sm.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
-		for(int i = t.size()-1 ; i >= 0; i--){
+		for(int i = b.size()-1 ; i >= 0; i--){
 			ActionStatePair<PuzzleMove,EightPuzzle> x = b.get(i);
 			System.out.print(x.getAction()+ ", ");
 		}
@@ -49,18 +49,18 @@ public class SearchObject {
 		
 		//A* PUZZEL QUIZ
 		Stack<ActionStatePair<PuzzleMove, EightPuzzle>> c = star.doSearch(EightPuzzle.randomEightPuzzle(),EightPuzzle.orderedEightPuzzle(), sf, agenda2);
-		for(int i = u.size()-1 ; i >= 0; i--){
+		for(int i = c.size()-1 ; i >= 0; i--){
 			ActionStatePair<PuzzleMove,EightPuzzle> x = c.get(i);
 			System.out.print(x.getAction()+ ", ");
 		}
-		System.out.println(); */
+		System.out.println();*/
 		
 		
 		///**
 		Stack<ActionStatePair<StringMove, Jumble>> d = jumble.doSearch(new Jumble("ollhe") , new Jumble("hello") , sfJ, agendaJ);
 		System.out.println(d.get(0).getState());
 		System.out.println(); 
-		System.out.println(); //*/
+		System.out.println(); 
 		
 		Stack<ActionStatePair<StringMove, Jumble>> e = jumbleB.doSearch(new Jumble("gmica") , new Jumble("magic") , sfJ, agendaJ2);
 		System.out.println(e.get(0).getState());
@@ -69,6 +69,6 @@ public class SearchObject {
 		
 	
 		Stack<ActionStatePair<StringMove, Jumble>> f = starJ.doSearch(new Jumble("idefnr") , new Jumble("friend") , sfJ, agendaJ2);
-		System.out.println(f.get(0).getState());
+		System.out.println(f.get(0).getState());//*/
 	}
 }
