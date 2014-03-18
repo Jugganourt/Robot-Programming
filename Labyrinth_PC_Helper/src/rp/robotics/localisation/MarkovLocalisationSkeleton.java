@@ -78,12 +78,12 @@ public class MarkovLocalisationSkeleton {
 		ActionModel actionModel = new PerfectActionModel();
 
 		DummySensorModel sensorModel = new DummySensorModel();
-
+		
 		while (true) {
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
 			Heading action = Heading.PLUS_X;
-
+			
 			// I'm faking movement by waiting for some time
 			Delay.msDelay(1000);
 
@@ -91,7 +91,7 @@ public class MarkovLocalisationSkeleton {
 			// the robot took. This creates a new instance of
 			// GridPoseDistribution and assigns it to distribution
 			distribution = actionModel.updateAfterMove(distribution, action);
-
+			distribution.normalise();
 			// Update visualisation. Only necessary because it needs to know
 			// about the new distribution instance
 			mapVis.setDistribution(distribution);

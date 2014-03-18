@@ -31,9 +31,9 @@ public class GridMapExample {
 
 		// Pick some point on the grid
 		int fromX = 1;
-		int fromY = 1;
+		int fromY = 2;
 		int toX = 1;
-		int toY = 2;
+		int toY = 3;
 
 		System.out.println(gridMap.isValidTransition(fromX, fromY, toX, toY));
 

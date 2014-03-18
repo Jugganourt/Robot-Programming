@@ -52,14 +52,38 @@ public class PerfectActionModel implements ActionModel {
 
 		// iterate through points updating as appropriate
 		for (int y = 0; y < _to.getGridHeight(); y++) {
+			float sum =0f;
 
 			for (int x = 0; x < _to.getGridWidth(); x++) {
-
-				
 				
 				// make sure to respect obstructed grid points
-				if (!_to.isObstructed(x, y)) {
-
+				if (!_to.isObstructed(x, y) && x >0) {
+					/** move doing usual probabilty stuff**/
+					//set prob of xy in the _to to be the prob of _from x-1 y  
+					
+					float  zero = 0f;
+					float _p = _from.getProbability(x, y);
+					
+					
+					_to.setProbability(x, y, _p);
+					_to.setProbability(x-1, y, zero);
+					
+					
+					
+				//}	
+//				else if(_to.isObstructed(x, y)){
+//					
+//					/** we know he is at a wall in the direction he is going **/
+////					JACOB
+//					float _p = _from.getProbability(x, y)+_from.getProbability(x-1, y);
+//					
+//					_to.setProbability(x, y, _p);
+//					
+					
+					// test to see if the robot can move first....if not, we don't move teh probabily, if it can we then can do nroaml prob stuff
+					
+					
+					
 					// the action model should work out all of the different
 					// ways (x,y) in the _to grid could've been reached based on
 					// the _from grid and the move taken (in this case
