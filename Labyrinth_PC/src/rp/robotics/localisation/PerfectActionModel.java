@@ -1,6 +1,5 @@
 package rp.robotics.localisation;
 
-import lejos.util.Delay;
 import rp.robotics.mapping.Heading;
 
 /**
@@ -50,33 +49,67 @@ public class PerfectActionModel implements ActionModel {
 	 */
 	private void movePlusX(GridPositionDistribution _from,
 			GridPositionDistribution _to) {
-		float p = 0;
+
 		// iterate through points updating as appropriate
 		for (int y = 0; y < _to.getGridHeight(); y++) {
+			float zero = 0f;
+
 			for (int x = 0; x < _to.getGridWidth(); x++) {
-								
-				
-	
 				
 				// make sure to respect obstructed grid points
-				if (!_to.isObstructed(x, y)) {
+				if (!_to.isObstructed(x, y) && x >0) {
 					
-					float q = _from.getProbability(x, y);
+					// position before move
+					int fromX = x;
+					int fromY = y;
+					float fromProb = _from.getProbability(fromX, fromY);
 					
-					if(_from.getGridMap().isValidTransition(x, y, x+1, y)){
-						
-						
-						_to.setProbability(x, y, p);
-						p = q;
-				
-					}
-					else{
-						_to.setProbability(x, y, p + q);
-						p = 0;
-					}
 					
-				
-									
+					
+					
+					float _p = _from.getProbability(x, y);
+					
+					
+					_to.setProbability(x, y, _p);
+					_to.setProbability(x-1, y, zero);
+					
+					
+					
+				//}	
+//				else if(_to.isObstructed(x, y)){
+//					
+//					/** we know he is at a wall in the direction he is going **/
+////					JACOB
+//					float _p = _from.getProbability(x, y)+_from.getProbability(x-1, y);
+//					
+//					_to.setProbability(x, y, _p);
+//					
+					
+					// test to see if the robot can move first....if not, we don't move teh probabily, if it can we then can do nroaml prob stuff
+					
+					
+					
+					// the action model should work out all of the different
+					// ways (x,y) in the _to grid could've been reached based on
+					// the _from grid and the move taken (in this case
+					// HEADING.PLUS_X)
+
+					// for example if the only way to have got to _to (x,y) was
+					// from _from (x-1, y) (i.e. there was a PLUS_X move from
+					// (x-1, y) then you write that to the (x, y) value
+
+					// The below code does not move the value, just copies
+					// it to the same position
+
+					
+
+					// position after move
+					int toX = x;
+					int toY = y;
+
+					// set probability for position after move
+					_to.setProbability(toX, toY, fromProb);
+
 				}
 			}
 		}

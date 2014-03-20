@@ -85,7 +85,7 @@ public class MarkovLocalisationSkeleton {
 			Heading action = Heading.PLUS_X;
 			
 			// I'm faking movement by waiting for some time
-			Delay.msDelay(1000);
+			//Delay.msDelay(1000);
 
 			// Once action is completed, apply action model based on the move
 			// the robot took. This creates a new instance of
@@ -101,7 +101,7 @@ public class MarkovLocalisationSkeleton {
 			// Do some sensing
 			// ...
 			// I'm faking sensing by waiting for some time
-			Delay.msDelay(1000);
+			Delay.msDelay(500);
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
