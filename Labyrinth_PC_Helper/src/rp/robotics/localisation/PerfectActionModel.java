@@ -1,6 +1,5 @@
 package rp.robotics.localisation;
 
-import lejos.util.Delay;
 import rp.robotics.mapping.Heading;
 
 /**
@@ -30,13 +29,15 @@ public class PerfectActionModel implements ActionModel {
 		if (_heading == Heading.PLUS_X) {
 			movePlusX(_from, to);
 		} else if (_heading == Heading.PLUS_Y) {
+			movePlusY(_from, to);
 			// you could implement a movePlusY etc. or you could find a way do
 			// do all moves in a single method. Hint: all changes are just + or
 			// - 1 to an x or y value.
 		} else if (_heading == Heading.MINUS_X) {
+			moveMinusX(_from, to);
 
 		} else if (_heading == Heading.MINUS_Y) {
-
+			moveMinusY(_from, to);
 		}
 
 		return to;
@@ -81,4 +82,105 @@ public class PerfectActionModel implements ActionModel {
 			}
 		}
 	}
+	
+	private void moveMinusX(GridPositionDistribution _from,
+			GridPositionDistribution _to) {
+		float p = 0;
+		// iterate through points updating as appropriate
+		for (int y = _to.getGridHeight()-1; y >= 0; y--) {
+			for (int x = _to.getGridWidth() -1; x >= 0; x--) {
+								
+				
+	
+				
+				// make sure to respect obstructed grid points
+				if (!_to.isObstructed(x, y)) {
+					
+					float q = _from.getProbability(x, y);
+					
+					if(_from.getGridMap().isValidTransition(x, y, x-1, y)){
+						
+						
+						_to.setProbability(x, y, p);
+						p = q;
+				
+					}
+					else{
+						_to.setProbability(x, y, p + q);
+						p = 0;
+					}
+					
+				
+									
+				}
+			}
+		}
+	}
+	
+	private void movePlusY(GridPositionDistribution _from,
+			GridPositionDistribution _to) {
+		float p = 0;
+		// iterate through points updating as appropriate
+		for (int x =0; x <  _to.getGridWidth() ; x++) {
+			for (int y = 0; y <  _to.getGridHeight(); y++){
+											
+				// make sure to respect obstructed grid points
+				if (!_to.isObstructed(x, y)) {
+					
+					float q = _from.getProbability(x, y);
+					
+					if(_from.getGridMap().isValidTransition(x, y, x, y+1)){
+						
+						
+						_to.setProbability(x, y, p);
+						p = q;
+				
+					}
+					else{
+						_to.setProbability(x, y, p + q);
+						p = 0;
+					}
+					
+				
+									
+				}
+			}
+		}
+	}
+	
+	private void moveMinusY(GridPositionDistribution _from,
+			GridPositionDistribution _to) {
+		float p = 0;
+		// iterate through points updating as appropriate
+		for (int x = _to.getGridWidth() -1; x >= 0; x--){
+			for (int y = _to.getGridHeight()-1; y >= 0; y--)  {
+								
+				
+	
+				
+				// make sure to respect obstructed grid points
+				if (!_to.isObstructed(x, y)) {
+					
+					float q = _from.getProbability(x, y);
+					
+					if(_from.getGridMap().isValidTransition(x, y, x, y-1)){
+						
+						
+						_to.setProbability(x, y, p);
+						p = q;
+				
+					}
+					else{
+						_to.setProbability(x, y, p + q);
+						p = 0;
+					}
+					
+				
+									
+				}
+			}
+		}
+	}
+	
+	
 }
