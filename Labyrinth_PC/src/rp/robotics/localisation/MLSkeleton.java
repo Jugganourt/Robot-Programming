@@ -23,7 +23,7 @@ public class MLSkeleton {
 		// ActionModel actionModel = new DummyActionModel();
 		ActionModel actionModel = new PerfectActionModel();
 
-		DummySensorModel sensorModel = new DummySensorModel();
+		//DummySensorModel sensorModel = new DummySensorModel();
 		
 		while (true) {
 			// Do some action
@@ -52,11 +52,12 @@ public class MLSkeleton {
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
-			sensorModel.updateDistributionAfterSensing(distribution/**
+			//sensorModel.updateDistributionAfterSensing(distribution
+			/**
 			 * , include
 			 * sensor readings
 			 **/
-			);
+			//);
 
 			// Note, as the sensor model changes the distribution directly, the
 			// visualisation will update automatically so

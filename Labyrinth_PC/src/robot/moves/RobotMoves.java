@@ -1,6 +1,7 @@
 package robot.moves;
 
 import rp.robotics.localisation.PerfectActionModel;
+import rp.robotics.mapping.Heading;
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
@@ -27,20 +28,7 @@ public class RobotMoves extends RobotSettings {
 		Button.waitForAnyPress();
 		Delay.msDelay(500);
 	}
-	public void speedChange(){
-		int reading = sensor.getDistance();
-		int desiredDistance = 350;
-		
-		reading = sensor.getDistance();
-		int error = desiredDistance - reading;
-		double speed = 0.6 * Math.abs(error);
-
-		pilot.setTravelSpeed(speed);
-		if(error<0)
-			pilot.forward();
-		else
-			pilot.backward();
-	}
+	
 	public void leftCondition(){
 		if(s_left.readValue() < threshold && s_right.readValue() >threshold)
 		{
@@ -48,6 +36,7 @@ public class RobotMoves extends RobotSettings {
 			pilot.travel(shortDistance);
 		}
 	}
+	
 	public void rightCondition()
 	{
 		if(s_left.readValue() > threshold && s_right.readValue() < threshold)
@@ -56,29 +45,14 @@ public class RobotMoves extends RobotSettings {
 			pilot.travel(shortDistance);
 		}
 	}
+	
 	public void forwardCondition(){
 		if(s_left.readValue() > threshold && s_right.readValue() > threshold)
 		{
 			pilot.forward(); 
 		} 
 	}
-	public void stuckCondition(){
-		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
-		{
-			pilot.travel(5);
-			if(s_left.readValue( ) < threshold){
-				pilot.travel(5);
-				pilot.rotate(5);
-				
-			}
-			if(s_left.readValue( ) > threshold){
-				pilot.travel(5);
-				pilot.rotate(5);
-			}
-		
-		}
-	}
-
+	
 	public void closeToGridWallCondition(){
 		if(sensor.getDistance() < wall){
 			
@@ -87,28 +61,7 @@ public class RobotMoves extends RobotSettings {
 			pilot.rotate(90);
 		}
 	}
-	public void junction(int ran){
-		
-		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
-		{
-			
-			pilot.travel(60);
-			if(ran == 1)
-				pilot.rotate(90);
-			else
-				if(ran ==2)
-					pilot.rotate(-90);
-				else pilot.forward();
-			while(canMove()){
-				closeToGridWallCondition();
-			}
-		
-//		
-			
-		}
-		
 	
-	}
 	private boolean canMove() {
 		if(sensor.getDistance() > wall){
 			return false;
@@ -117,25 +70,39 @@ public class RobotMoves extends RobotSettings {
 			return true;
 		}
 	}
-
-	public int junctionReturn(int ran,int i){
+	
+	public void junction(int ran){
+		
 		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
 		{
 			
 			pilot.travel(60);
-			if(ran == 1)
+			if(ran == 1){
 				pilot.rotate(90);
-			else
-				if(ran ==2)
+			}
+			else if(ran ==2){
 					pilot.rotate(-90);
-				else pilot.forward();
-			i++;
+			}
+			else{ pilot.forward();}
+			while(canMove()){
+				closeToGridWallCondition();
+			}	
+			
 		}
-	return i;
+		
+	
 	}
-
-
-
-
+	
+	protected boolean junction() {
+		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
 
 }
