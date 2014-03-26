@@ -77,20 +77,20 @@ public class MarkovLocalisationSkeleton {
 		// ActionModel actionModel = new DummyActionModel();
 		ActionModel actionModel = new PerfectActionModel();
 
-		DummySensorModel sensorModel = new DummySensorModel();
+		PerfectSensorModel sensorModel = new PerfectSensorModel();
 		
 		while (true) {
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
-			Heading action = Heading.PLUS_Y;
+			//Heading action = Heading.PLUS_Y;
 			// I'm faking movement by waiting for some time
-			Delay.msDelay(1000);
+			//Delay.msDelay(1000);
 
 			// Once action is completed, apply action model based on the move
 			// the robot took. This creates a new instance of
 			// GridPoseDistribution and assigns it to distribution
-			distribution = actionModel.updateAfterMove(distribution, action);
-			distribution.normalise();
+			//distribution = actionModel.updateAfterMove(distribution, action);
+			
 			
 			
 			// Update visualisation. Only necessary because it needs to know
@@ -99,7 +99,7 @@ public class MarkovLocalisationSkeleton {
 			
 		
 
-			System.out.println("map sum: " + distribution.sumProbabilities());
+			
 
 			// Do some sensing
 			// ...
@@ -108,11 +108,18 @@ public class MarkovLocalisationSkeleton {
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
-			sensorModel.updateDistributionAfterSensing(distribution/**
-			 * , include
-			 * sensor readings
-			 **/
-			);
+			int x =2;
+			int y=1;
+			float valueB = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_X);
+			float valueL = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_Y);
+			float valueF = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.PLUS_X);
+			float valueR = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.PLUS_Y);
+			sensorModel.updateDistributionAfterSensing(valueL,valueR, valueF, valueB,distribution);
+			distribution.normalise();
+			// Note, as the sensor model changes the distribution directly, the
+			// visualisation will update automatically so
+			// mapVis.setDistribution is not necessary after the sensor model
+			System.out.println("map sum: " + distribution.sumProbabilities());
 
 			// Note, as the sensor model changes the distribution directly, the
 			// visualisation will update automatically so
