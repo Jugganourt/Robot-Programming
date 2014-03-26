@@ -5,7 +5,7 @@ import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.LocalisationUtils;
 
-public class MarkovLocalisationSkeleton {
+public class MLSkeleton {
 
 	/**
 	 * @param args
@@ -29,6 +29,7 @@ public class MarkovLocalisationSkeleton {
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
 			Heading action = Heading.PLUS_Y;
+			System.out.println(action);
 			// I'm faking movement by waiting for some time
 			Delay.msDelay(1000);
 

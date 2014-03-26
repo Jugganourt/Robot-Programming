@@ -1,5 +1,6 @@
 package robot.moves;
 
+import rp.robotics.localisation.PerfectActionModel;
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
@@ -15,6 +16,8 @@ public class RobotMoves extends RobotSettings {
 	private int wall = 300;
 	private int noLine = 15;
 	private int shortDistance = 5;
+	PerfectActionModel model = new PerfectActionModel();
+	
 
 	public RobotMoves(){
 		super();
