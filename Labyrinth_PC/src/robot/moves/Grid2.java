@@ -1,4 +1,4 @@
-package robotics.FeedbackAndFriend;
+package robot.moves;
 
 import java.util.Random;
 
@@ -17,7 +17,6 @@ public class Grid2 extends RobotMoves {
 			int ran = rand.nextInt(3);
 			forwardCondition();
 			junction(ran);
-			//closeToGridWallCondition();
 			rightCondition();
 			leftCondition();
 		}

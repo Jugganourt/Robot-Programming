@@ -1,15 +1,9 @@
 package rp.robotics.localisation;
 
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
-import javax.swing.JFrame;
-
 import lejos.util.Delay;
 import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.LocalisationUtils;
-import rp.robotics.visualisation.GridPoseDistributionVisualisation;
 
 public class MarkovLocalisationSkeleton {
 
@@ -18,61 +12,13 @@ public class MarkovLocalisationSkeleton {
 	 */
 	public static void main(String[] args) {
 
-		JFrame frame = new JFrame("Map Viewer");
-		frame.addWindowListener(new WindowListener() {
-
-			@Override
-			public void windowOpened(WindowEvent _arg0) {
-
-			}
-
-			@Override
-			public void windowIconified(WindowEvent _arg0) {
-
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent _arg0) {
-
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent _arg0) {
-
-			}
-
-			@Override
-			public void windowClosing(WindowEvent _arg0) {
-
-			}
-
-			@Override
-			public void windowClosed(WindowEvent _arg0) {
-
-				System.exit(0);
-
-			}
-
-			@Override
-			public void windowActivated(WindowEvent _arg0) {
-
-			}
-		});
-
+		
 		GridMap gridMap = LocalisationUtils.create2014Map1();
 
 		// The probability distribution over the robot's location
 		GridPositionDistribution distribution = new GridPositionDistribution(
 				gridMap);
 
-		// view the map with 2 pixels as 1 cm
-		GridPoseDistributionVisualisation mapVis = new GridPoseDistributionVisualisation(
-				distribution, 2);
-
-		frame.add(mapVis);
-		frame.pack();
-		frame.setSize(1050, 600);
-		frame.setVisible(true);
 
 		// ActionModel actionModel = new DummyActionModel();
 		ActionModel actionModel = new PerfectActionModel();
@@ -91,12 +37,9 @@ public class MarkovLocalisationSkeleton {
 			// GridPoseDistribution and assigns it to distribution
 			distribution = actionModel.updateAfterMove(distribution, action);
 			distribution.normalise();
-			
-			
+						
 			// Update visualisation. Only necessary because it needs to know
 			// about the new distribution instance
-			mapVis.setDistribution(distribution);
-			
 		
 
 			System.out.println("map sum: " + distribution.sumProbabilities());

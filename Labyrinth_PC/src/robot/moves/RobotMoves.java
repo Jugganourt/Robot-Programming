@@ -1,4 +1,4 @@
-package robotics.FeedbackAndFriend;
+package robot.moves;
 
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
@@ -10,7 +10,7 @@ public class RobotMoves extends RobotSettings {
 	
 	public static LightSensor s_left = new LightSensor(SensorPort.S3);
 	public static LightSensor s_right = new LightSensor(SensorPort.S2);
-	private int threshold = 44;
+	private int threshold = 40;
 	private static OpticalDistanceSensor sensor = new OpticalDistanceSensor(SensorPort.S4);
 	private int wall = 300;
 	private int noLine = 15;
@@ -75,6 +75,7 @@ public class RobotMoves extends RobotSettings {
 		
 		}
 	}
+
 	public void closeToGridWallCondition(){
 		if(sensor.getDistance() < wall){
 			
@@ -84,6 +85,7 @@ public class RobotMoves extends RobotSettings {
 		}
 	}
 	public void junction(int ran){
+		
 		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
 		{
 			
@@ -94,11 +96,25 @@ public class RobotMoves extends RobotSettings {
 				if(ran ==2)
 					pilot.rotate(-90);
 				else pilot.forward();
-		}
+			while(canMove()){
+				closeToGridWallCondition();
+			}
 		
+//		
+			
+		}
 		
 	
 	}
+	private boolean canMove() {
+		if(sensor.getDistance() > wall){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 	public int junctionReturn(int ran,int i){
 		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
 		{
