@@ -108,13 +108,18 @@ public class MarkovLocalisationSkeleton {
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
-			int x =2;
-			int y=1;
+			Delay.msDelay(5000);
+			int x =4;
+			int y=2;
 			float valueB = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_X);
-			float valueL = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_Y);
+			System.out.println("minus x: "+valueB);
+			float valueL =  gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_Y);
+			System.out.println("minus y: "+valueL);
 			float valueF = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.PLUS_X);
+			System.out.println("plus x: "+valueF);
 			float valueR = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.PLUS_Y);
-			sensorModel.updateDistributionAfterSensing(valueL,valueR, valueF, valueB,distribution);
+			System.out.println("plus y: "+valueR);
+			distribution = sensorModel.updateDistributionAfterSensing(valueL,valueR, valueF, valueB,distribution);
 			distribution.normalise();
 			// Note, as the sensor model changes the distribution directly, the
 			// visualisation will update automatically so

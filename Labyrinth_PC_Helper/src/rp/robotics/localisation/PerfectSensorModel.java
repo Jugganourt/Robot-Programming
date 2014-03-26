@@ -12,7 +12,7 @@ import rp.robotics.mapping.Heading;
  */
 public class PerfectSensorModel {
 	private float currR, currL, currF, currB;
-	public void updateDistributionAfterSensing(float valueL,float valueR, float valueF, float valueB,GridPositionDistribution _dist) {
+	public GridPositionDistribution updateDistributionAfterSensing(float valueL,float valueR, float valueF, float valueB,GridPositionDistribution _dist) {
 		GridPositionDistribution to = new GridPositionDistribution(_dist);
 		for (int y = 0; y < to.getGridHeight(); y++) {
 			for (int x = 0; x < to.getGridWidth(); x++)
@@ -28,13 +28,13 @@ public class PerfectSensorModel {
 					 
 				 }
 				 else{
-					 
 					 to.setProbability(x, y,0.f);
 				 }
 					 
 			}
 			}
-		}
+			
+		}return to;
 		/*4 measurements 
 		get 4 measuremnt 
 		compare the measurment to all positions on the map 
@@ -68,7 +68,9 @@ public class PerfectSensorModel {
 	private boolean aprox(float value, float curr) {
 		if(curr<value+3 && curr>value-3)
 		{
+			
 			return true;
+			
 		}
 		else{
 		return false;
