@@ -34,7 +34,7 @@ public class Grid2 extends RobotSettings {
 	private float max = 0;
 	private int xMax = 0;
 	private int yMax = 0;
-	private double thres = 0.1;
+	private double thres = 0.15;
 
 	public Grid2() {
 		super();
