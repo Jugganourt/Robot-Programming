@@ -10,8 +10,24 @@ import rp.robotics.mapping.Heading;
  * @author nah
  * 
  */
+
+
 public class PerfectSensorModel {
 	private float currR, currL, currF, currB;
+	
+	public float getCurrR() {
+		return currR;
+	}
+	public float getCurrL() {
+		return currL;
+	}
+	public float getCurrF() {
+		return currF;
+	}
+	public float getCurrB() {
+		return currB;
+	}
+	
 	public GridPositionDistribution updateDistributionAfterSensing(float valueL,float valueR, float valueF, float valueB,GridPositionDistribution _dist) {
 		GridPositionDistribution to = new GridPositionDistribution(_dist);
 		for (int y = 0; y < to.getGridHeight(); y++) {
@@ -30,6 +46,7 @@ public class PerfectSensorModel {
 				 else{
 					 to.setProbability(x, y,0.f);
 				 }
+				 
 					 
 			}
 			}
@@ -66,7 +83,7 @@ public class PerfectSensorModel {
 		// _dist.normalise();
 	}
 	private boolean aprox(float value, float curr) {
-		if(curr<value+70 && curr>value-70) // accepts an error of 7 cm
+		if(value>800 || (curr<value+70 && curr>value-70)) // accepts an error of 7 cm
 		{
 			
 			return true;
