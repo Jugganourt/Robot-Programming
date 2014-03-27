@@ -2,11 +2,16 @@ package robot.moves;
 
 import java.util.Random;
 
+import data.Node;
+import data.Point;
+import data_structures.Stack;
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
+import lejos.nxt.Sound;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.util.Delay;
+import main.SolveGrid;
 import rp.robotics.localisation.ActionModel;
 import rp.robotics.localisation.GridPositionDistribution;
 import rp.robotics.localisation.PerfectActionModel;
@@ -14,6 +19,8 @@ import rp.robotics.localisation.PerfectSensorModel;
 import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.LocalisationUtils;
+import search.Solve;
+import search.Solve.Search;
 
 public class Grid2 extends RobotSettings {
 	
@@ -21,7 +28,7 @@ public class Grid2 extends RobotSettings {
 	public static LightSensor s_right = new LightSensor(SensorPort.S2);
 	private int threshold = 40;
 	private static OpticalDistanceSensor sensor = new OpticalDistanceSensor(SensorPort.S4);
-	private int wall = 300;
+	private int wall = 315;
 	private int noLine = 15;
 	private int shortDistance = 5;
 	PerfectActionModel model = new PerfectActionModel();
@@ -36,7 +43,7 @@ public class Grid2 extends RobotSettings {
 	private float max = 0;
 	private int xMax = 0;
 	private int yMax = 0;
-	private double thres = 0.3;
+	private double thres = 0.4;
 
 	public Grid2() {
 		super();
@@ -118,60 +125,87 @@ public class Grid2 extends RobotSettings {
 		
 		if(maxprob(gridMap)< thres){
 			
-		if(s_left.readValue() < threshold && s_right.readValue() < threshold)
-		{
+			if(s_left.readValue() < threshold && s_right.readValue() < threshold)
+			{
 			
-			pilot.travel(60);
-			if(ran == 1){
-				System.out.println(action);
-				distribution = actionModel.updateAfterMove(distribution, action);
-				distribution.normalise();
-				action = cycleThroughtLeft(action);
-				distribution = sensing4D(distribution);
-				//sensing
-				/*
-				 * senseleft, right, ahead, update distribution and carry on 
-				 */
-				pilot.rotate(90);
+				pilot.travel(60);
+				/*if(ran == 1){
+					System.out.println(action);
+					distribution = actionModel.updateAfterMove(distribution, action);
+					distribution.normalise();
+					action = cycleThroughtLeft(action);
+					//distribution = sensing4D(distribution);
+					//sensing
+					// senseleft, right, ahead, update distribution and carry on 
+				
+					pilot.rotate(90);
 				
 				
-			}
-			else if(ran ==2){
-				System.out.println(action);
-				distribution = actionModel.updateAfterMove(distribution, action);
-				distribution.normalise();
-				action = cycleThroughtRight(action);
-				distribution = sensing4D(distribution);
+				}
+				else if(ran ==2){
+					System.out.println(action);
+					distribution = actionModel.updateAfterMove(distribution, action);
+					distribution.normalise();
+					action = cycleThroughtRight(action);
+					//distribution = sensing4D(distribution);
 					pilot.rotate(-90);
-			}
-			else{ 
-				System.out.println(action);
-				distribution = actionModel.updateAfterMove(distribution, action);
-				distribution.normalise();
-				action = cycleThroughtForward(action);
-				distribution = sensing4D(distribution);
-				pilot.forward();
+				}
+				else{ 
+					System.out.println(action);
+					distribution = actionModel.updateAfterMove(distribution, action);
+					distribution.normalise();
+					action = cycleThroughtForward(action);
+					//distribution = sensing4D(distribution);
+					pilot.forward();
 				}
 			
-			while(canMove()){
-				closeToGridWallCondition();
-				action = cycleThroughtLeft(action);
+				while(canMove()){
+					closeToGridWallCondition();
+					action = cycleThroughtLeft(action);			
+				}*/
+				
+				if(sensor.getDistance() > wall){
+					System.out.println(action);
+					distribution = actionModel.updateAfterMove(distribution, action);
+					distribution.normalise();
+					action = cycleThroughtForward(action);
+				}
+				else{
+					System.out.println(action);
+					distribution = actionModel.updateAfterMove(distribution, action);
+					distribution.normalise();
+					while(canMove()){
+						closeToGridWallCondition();
+						action = cycleThroughtLeft(action);			
+					}
+				}
+				System.out.println("map sum: " + distribution.sumProbabilities());
 			}
-			
-
-
-			System.out.println("map sum: " + distribution.sumProbabilities());
-			
-		}
 		}
 		if(maxprob(gridMap)>thres){
-		System.out.println("Xposs:" + xMax);
-		System.out.println("Xposs:" + yMax);
+			
+			Sound.beep();
+			System.out.println("Xposs:" + xMax);
+			System.out.println("Yposs:" + yMax);
+			FindAPlace(xMax, yMax);
+		
 		}
 		
 	
 	}
 	
+	private void FindAPlace(int xPoss, int yPoss) {
+			
+			Sound.beepSequence();
+		
+			Stack<Node<Point>> nodes = Solve.solveGrid(new Point(xPoss,yPoss,(xPoss+yPoss)), new Point(5,3,(5+3)), Search.BREADTH_FIRST);
+			SolveGrid grid = new SolveGrid(xPoss, yPoss, null);
+			
+	}
+
+	
+
+
 	private double maxprob(GridMap gridMap) {
 		
 	
@@ -191,7 +225,7 @@ public class Grid2 extends RobotSettings {
 
 
 
-	public Heading cycleThroughtLeft(Heading action){
+	public static Heading cycleThroughtLeft(Heading action){
 		if(action == Heading.PLUS_X ){
 			 action = Heading.MINUS_Y;
 		}
@@ -208,7 +242,7 @@ public class Grid2 extends RobotSettings {
 		
 	}	
 	
-	public Heading cycleThroughtRight(Heading action){
+	public static Heading cycleThroughtRight(Heading action){
 		if(action == Heading.PLUS_X ){
 			 action = Heading.PLUS_Y;
 		}
@@ -225,7 +259,7 @@ public class Grid2 extends RobotSettings {
 		
 	}	
 	
-	public Heading cycleThroughtForward(Heading action){
+	public static Heading cycleThroughtForward(Heading action){
 		if(action == Heading.PLUS_X ){
 			 action = Heading.PLUS_X;
 		}
@@ -241,9 +275,26 @@ public class Grid2 extends RobotSettings {
 		return action;
 		
 	}	
-	public GridPositionDistribution sensing4D(GridPositionDistribution g1){
+	
+	public static Heading cycleThroughtBackwards(Heading action){
+		if(action == Heading.PLUS_X ){
+			 action = Heading.MINUS_X;
+		}
+		else if( action == Heading.PLUS_Y){
+			action = Heading.MINUS_Y;
+		}
+		else if(action == Heading.MINUS_X){
+			action = Heading.PLUS_X;
+		}
+		else if(action == Heading.MINUS_Y){
+			action = Heading.PLUS_Y;
+		}
+		return action;
 		
-		PerfectSensorModel sensorModel = new PerfectSensorModel();
+	}	
+	/**public GridPositionDistribution sensing4D(GridPositionDistribution g1){
+		
+		PerfectSensorModel sensorModel = new PerfectSensorModel(action);
 		float valueF = sensor.getRange();
 		sensormotor.rotate(95);
 		System.out.println(valueF);
@@ -259,5 +310,5 @@ public class Grid2 extends RobotSettings {
 		g1 = sensorModel.updateDistributionAfterSensing(valueL,valueR, valueF, valueB,g1);
 		g1.normalise();
 		return g1;
-	}
+	}**/
 }
