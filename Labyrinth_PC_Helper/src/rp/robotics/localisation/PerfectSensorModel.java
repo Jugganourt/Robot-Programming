@@ -66,7 +66,7 @@ public class PerfectSensorModel {
 		// _dist.normalise();
 	}
 	private boolean aprox(float value, float curr) {
-		if(curr<value+3 && curr>value-3)
+		if(curr<value+70 && curr>value-70)
 		{
 			
 			return true;
