@@ -1,6 +1,7 @@
 package robot.moves;
 
 import java.util.Random;
+
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
@@ -9,6 +10,7 @@ import lejos.util.Delay;
 import rp.robotics.localisation.ActionModel;
 import rp.robotics.localisation.GridPositionDistribution;
 import rp.robotics.localisation.PerfectActionModel;
+import rp.robotics.localisation.PerfectSensorModel;
 import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.LocalisationUtils;
@@ -34,7 +36,7 @@ public class Grid2 extends RobotSettings {
 	private float max = 0;
 	private int xMax = 0;
 	private int yMax = 0;
-	private double thres = 0.15;
+	private double thres = 0.3;
 
 	public Grid2() {
 		super();
@@ -125,6 +127,11 @@ public class Grid2 extends RobotSettings {
 				distribution = actionModel.updateAfterMove(distribution, action);
 				distribution.normalise();
 				action = cycleThroughtLeft(action);
+				distribution = sensing4D(distribution);
+				//sensing
+				/*
+				 * senseleft, right, ahead, update distribution and carry on 
+				 */
 				pilot.rotate(90);
 				
 				
@@ -134,6 +141,7 @@ public class Grid2 extends RobotSettings {
 				distribution = actionModel.updateAfterMove(distribution, action);
 				distribution.normalise();
 				action = cycleThroughtRight(action);
+				distribution = sensing4D(distribution);
 					pilot.rotate(-90);
 			}
 			else{ 
@@ -141,6 +149,7 @@ public class Grid2 extends RobotSettings {
 				distribution = actionModel.updateAfterMove(distribution, action);
 				distribution.normalise();
 				action = cycleThroughtForward(action);
+				distribution = sensing4D(distribution);
 				pilot.forward();
 				}
 			
@@ -232,5 +241,23 @@ public class Grid2 extends RobotSettings {
 		return action;
 		
 	}	
-	
+	public GridPositionDistribution sensing4D(GridPositionDistribution g1){
+		
+		PerfectSensorModel sensorModel = new PerfectSensorModel();
+		float valueF = sensor.getRange();
+		sensormotor.rotate(95);
+		System.out.println(valueF);
+		float valueR = sensor.getRange();
+		sensormotor.rotate(95);
+		System.out.println(valueR);
+		float valueB = sensor.getRange();
+		sensormotor.rotate(95);
+		System.out.println(valueB);
+		float valueL = sensor.getRange();
+		System.out.println(valueL);
+		sensormotor.rotate(-285);
+		g1 = sensorModel.updateDistributionAfterSensing(valueL,valueR, valueF, valueB,g1);
+		g1.normalise();
+		return g1;
+	}
 }

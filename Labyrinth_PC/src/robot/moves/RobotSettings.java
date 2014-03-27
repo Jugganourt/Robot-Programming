@@ -10,6 +10,7 @@ public class RobotSettings {
 
 	private final static RegulatedMotor left = Motor.C;
 	private final static RegulatedMotor right = Motor.B;
+	public final static RegulatedMotor sensormotor = Motor.A;
 	public final static DifferentialPilot pilot = new DifferentialPilot(56,
 			122, left, right);
 	

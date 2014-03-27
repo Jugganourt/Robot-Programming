@@ -18,7 +18,7 @@ public class PerfectSensorModel {
 			for (int x = 0; x < to.getGridWidth(); x++)
 			{	
 				if (!_dist.isObstructed(x, y)) {
-				 currR = _dist.getGridMap().rangeToObstacleFromGridPoint(x, y,Heading.PLUS_Y);
+				 currR = _dist.getGridMap().rangeToObstacleFromGridPoint(x, y,Heading.PLUS_Y);//difference between what his right is and what the right in the virtual model is 
 				 currL = _dist.getGridMap().rangeToObstacleFromGridPoint(x, y,Heading.MINUS_Y);
 				 currF = _dist.getGridMap().rangeToObstacleFromGridPoint(x, y,Heading.PLUS_X);
 				 currB = _dist.getGridMap().rangeToObstacleFromGridPoint(x, y,Heading.MINUS_X);
@@ -66,7 +66,7 @@ public class PerfectSensorModel {
 		// _dist.normalise();
 	}
 	private boolean aprox(float value, float curr) {
-		if(curr<value+70 && curr>value-70)
+		if(curr<value+70 && curr>value-70) // accepts an error of 7 cm
 		{
 			
 			return true;
