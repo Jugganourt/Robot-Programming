@@ -27,7 +27,7 @@ public class Test2 extends RobotSettings{
 		 */
 		
 		OpticalDistanceSensor sensor = new OpticalDistanceSensor(SensorPort.S4);
-		PerfectSensorModel sensorModel = new PerfectSensorModel();
+		
 		GridMap gridMap = LocalisationUtils.create2014Map1();
 		int x =3;
 		int y= 0;
