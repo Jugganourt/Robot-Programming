@@ -31,11 +31,11 @@ public class PerfectSensorModel {
 				 currB = _dist.getGridMap().rangeToObstacleFromGridPoint(x, y, Grid2.cycleThroughtBackwards(currentAction));
 				 if(aprox(valueL, currL) && aprox(valueR, currR) && aprox(valueF, currF) && aprox(valueB, currB))
 				 {
-					 to.setProbability(x, y, _dist.getProbability(x, y));
+					 to.setProbability(x, y, _dist.getProbability(x, y)*8);
 					 
 				 }
 				 else{
-					 to.setProbability(x, y,0.f);
+					 to.setProbability(x, y,_dist.getProbability(x, y));
 				 }
 					 
 			}
@@ -73,7 +73,7 @@ public class PerfectSensorModel {
 		// _dist.normalise();
 	}
 	private boolean aprox(float value, float curr) {
-		if(curr<value+70 && curr>value-70) // accepts an error of 7 cm
+		if(value>80 || (curr<value+7 && curr>value-7)) // accepts an error of 7 cm
 		{
 			
 			return true;
@@ -84,4 +84,4 @@ public class PerfectSensorModel {
 		}
 	}
 
-}
+	}

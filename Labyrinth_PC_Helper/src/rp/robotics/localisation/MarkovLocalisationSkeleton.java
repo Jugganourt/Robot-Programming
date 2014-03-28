@@ -78,16 +78,32 @@ public class MarkovLocalisationSkeleton {
 		ActionModel actionModel = new PerfectActionModel();
 
 		PerfectSensorModel sensorModel = new PerfectSensorModel();
-		
-		while (true) {
+		int i=15;
+		while (i>0) {
 			
-			Heading action = Heading.MINUS_X;
-		Delay.msDelay(1000);
-
+			Heading action = Heading.PLUS_X;
+			Delay.msDelay(1000);
+			int x =0;
+			int y=0;
+			/*
+			 * you've done the move and updated the distribution, do the sensing there and update your model
+			 * 
+			 */
+			
 			distribution = actionModel.updateAfterMove(distribution, action);
-			
+			distribution.normalise();
+			float valueB = gridMap.rangeToObstacleFromGridPoint(x+1, y, Heading.MINUS_X);
+			System.out.println("minus x: "+valueB);
+			float valueL =  gridMap.rangeToObstacleFromGridPoint(x+1, y, Heading.MINUS_Y);
+			System.out.println("minus y: "+valueL);
+			float valueF = gridMap.rangeToObstacleFromGridPoint(x+1, y, Heading.PLUS_X);
+			System.out.println("plus x: "+valueF);
+			float valueR = gridMap.rangeToObstacleFromGridPoint(x+1, y, Heading.PLUS_Y);
+			System.out.println("plus y: "+valueR);
+			distribution = sensorModel.updateDistributionAfterSensing(valueL, valueR, valueF, valueB, distribution);
+			distribution.normalise();
 			mapVis.setDistribution(distribution);
-			
+			i--;
 		
 
 			
@@ -100,16 +116,7 @@ public class MarkovLocalisationSkeleton {
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
 		/*	Delay.msDelay(5000);
-			int x =4;
-			int y=2;
-			float valueB = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_X);
-			System.out.println("minus x: "+valueB);
-			float valueL =  gridMap.rangeToObstacleFromGridPoint(x, y, Heading.MINUS_Y);
-			System.out.println("minus y: "+valueL);
-			float valueF = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.PLUS_X);
-			System.out.println("plus x: "+valueF);
-			float valueR = gridMap.rangeToObstacleFromGridPoint(x, y, Heading.PLUS_Y);
-			System.out.println("plus y: "+valueR);
+			
 			distribution = sensorModel.updateDistributionAfterSensing(valueL,valueR, valueF, valueB,distribution);
 			distribution.normalise();
 			// Note, as the sensor model changes the distribution directly, the
