@@ -56,12 +56,11 @@ public class Grid2 extends RobotSettings {
 	public void run() {
 		while (m_run()) {
 			pilot.setTravelSpeed(100);
-			FindAPlace(0, 0);
-			/*int ran = rand.nextInt(3);
+			int ran = rand.nextInt(3);
 			forwardCondition();
 			rightCondition();
 			leftCondition();
-			junction(ran);*/
+			junction(ran);
 		}
 	}
 
@@ -232,7 +231,7 @@ public class Grid2 extends RobotSettings {
 
 		ForbiddenCollection fob = new ForbiddenCollection(foblist);
 
-		Grid state = new Grid(xMax, yMax, fob);
+		Grid state = new Grid(xPoss, yPoss, fob);
 
 		Grid goal = new Grid(5, 3, fob);
 
@@ -248,101 +247,213 @@ public class Grid2 extends RobotSettings {
 		List<PuzzleMove> path = new ArrayList<PuzzleMove>();
 
 		path = node.getPath();
-
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		System.out.println(path);
-		int count = 0;
+		int count = 1;
 		// Stack<Node<Point>> nodes = Solve.solveGrid(new
 		// Point(xPoss,yPoss,(xPoss+yPoss)), new Point(5,3,(5+3)),
 		// Search.BREADTH_FIRST);
 		// SolveGrid grid = new SolveGrid(xPoss, yPoss, null);
 		while (true) {
+			
+		
 			forwardCondition();
 			rightCondition();
 			leftCondition();
 			if (s_left.readValue() < threshold && s_right.readValue() < threshold) {
 				pilot.travel(60);
 				PuzzleMove rount = path.get(count);
-				System.out.println(count);
-				System.out.println(action);
-				System.out.println(rount.toString());
-				System.out.println(rount);
+//				System.out.println(count);
+//				System.out.println(action);
+//				System.out.println(rount.toString());
+//				System.out.println(rount);
 				if (rount.toString().equals("UP")) {
 					if(action == Heading.PLUS_Y){
-						cycleThroughtForward(action);
+						action = cycleThroughtForward(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.PLUS_X){
 						pilot.rotate(90);
-						cycleThroughtLeft(action);
+						action = cycleThroughtLeft(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.MINUS_X){
 						pilot.rotate(-90);
-						cycleThroughtRight(action);
+						action = cycleThroughtRight(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.MINUS_Y){
 						pilot.rotate(180);
-						cycleThroughtBackwards(action);
+						
+						action = cycleThroughtBackwards(action);
+						count--;
+						
 					}
 					
 				} else if (rount.toString().equals("DOWN")) {
 					if(action == Heading.PLUS_Y){
-						pilot.rotate(180);
-						cycleThroughtBackwards(action);
+						action = cycleThroughtForward(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.PLUS_X){
 						pilot.rotate(-90);
-						cycleThroughtRight(action);
+						action = cycleThroughtRight(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.MINUS_X){
 						pilot.rotate(90);
-						cycleThroughtLeft(action);
+						action = cycleThroughtLeft(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.MINUS_Y){
-						cycleThroughtForward(action);
+						pilot.rotate(180);
+						action = cycleThroughtBackwards(action);
+						count--;
+						
 					}
 					
 				} else if (rount.toString().equals("LEFT")) {
 					if(action == Heading.PLUS_Y){
 						pilot.rotate(-90);						
-						cycleThroughtRight(action);
+						action = cycleThroughtRight(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.PLUS_X){
 						pilot.rotate(180);
-						cycleThroughtBackwards(action);
+						action = cycleThroughtBackwards(action);
+						count--;
 					}
 					else if(action == Heading.MINUS_X){
-						cycleThroughtForward(action);
+						action = cycleThroughtForward(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.MINUS_Y){
 						pilot.rotate(90);
-						cycleThroughtLeft(action);
+						action = cycleThroughtLeft(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 				} else if (rount.toString().equals("RIGHT")) {
 					if(action == Heading.PLUS_Y){
 						pilot.rotate(90);
-						cycleThroughtLeft(action);
+						action = cycleThroughtLeft(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.PLUS_X){
-						cycleThroughtForward(action);
+						action = cycleThroughtForward(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else if(action == Heading.MINUS_X){
 						pilot.rotate(180);
-						cycleThroughtBackwards(action);
+						action = cycleThroughtBackwards(action);
+						count--;
 					}
 					else if(action == Heading.MINUS_Y){
 						pilot.rotate(-90);
-						cycleThroughtRight(action);
+						action = cycleThroughtRight(action);
+						if (count != path.size() - 1) {
+							System.out.println(path.get(count));
+							count++;
+						}
 					}
 					else{
 						System.out.println("WELL SHIT!");
 					}
 				}
-				if (count != path.size() - 1) {
-					System.out.println(path.get(count));
-					count++;
-				}
+
 				
 			}
 		}
+				/**
+		for (int i = 0; i < path.size(); i++) {
+			if (path.get(i) == Grid.PuzzleMove.UP) {
+				if (action == Heading.PLUS_X) {
+					list.add(1);
+					action = Heading.MINUS_Y;
+				} else if (action == Heading.PLUS_Y) {
+					list.add(4);
+					action=Heading.MINUS_Y;
+				} else if (action == Heading.MINUS_X) {
+					list.add(2);
+					action = Heading.MINUS_Y;
+				} else if (action == Heading.MINUS_Y) {
+					list.add(0);
+				}
+			} else if (path.get(i) == Grid.PuzzleMove.DOWN) {
+				if (action == Heading.PLUS_X) {
+					list.add(2);
+					action = Heading.PLUS_Y;
+				} else if (action == Heading.PLUS_Y) {
+					list.add(0);
+				} else if (action == Heading.MINUS_X) {
+					list.add(1);
+					action = Heading.PLUS_Y;
+				} else if (action == Heading.MINUS_Y) {
+					list.add(4);
+					action=Heading.PLUS_Y;
+				}
+			} else if (path.get(i) == Grid.PuzzleMove.RIGHT) {
+				if (action == Heading.PLUS_X) {
+					list.add(0);
+				} else if (action == Heading.PLUS_Y) {
+					list.add(1);
+					action=Heading.PLUS_X;
+				} else if (action == Heading.PLUS_X) {
+					list.add(4);
+					action=Heading.MINUS_X;
+				} else if (action == Heading.MINUS_Y) {
+					list.add(2);
+					action = Heading.PLUS_X;
+				}
+				}
+			else if (path.get(i) == Grid.PuzzleMove.LEFT) {
+				if (action == Heading.PLUS_X) {
+					list.add(4);
+					action=Heading.MINUS_X;
+				} else if (action == Heading.PLUS_Y) {
+					list.add(2);
+					action=Heading.MINUS_X;
+				} else if (action == Heading.MINUS_X) {
+					list.add(0);
+				} else if (action == Heading.MINUS_Y) {
+					list.add(1);
+					action = Heading.MINUS_X;
+				}
+				}
+			}**/
+		
 	}
 
 	private double maxprob(GridMap gridMap) {
