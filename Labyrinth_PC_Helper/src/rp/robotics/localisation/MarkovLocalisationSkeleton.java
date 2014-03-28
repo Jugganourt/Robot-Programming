@@ -83,8 +83,8 @@ public class MarkovLocalisationSkeleton {
 			
 			Heading action = Heading.PLUS_X;
 			Delay.msDelay(1000);
-			int x =0;
-			int y=0;
+			int x =5;
+			int y=2;
 			/*
 			 * you've done the move and updated the distribution, do the sensing there and update your model
 			 * 

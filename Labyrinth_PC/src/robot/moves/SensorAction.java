@@ -1,17 +1,12 @@
 package robot.moves;
 
 import java.util.Random;
-
-import data.Node;
-import data.Point;
-import data_structures.Stack;
 import lejos.nxt.Button;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.Sound;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.util.Delay;
-import main.SolveGrid;
 import rp.robotics.localisation.ActionModel;
 import rp.robotics.localisation.GridPositionDistribution;
 import rp.robotics.localisation.PerfectActionModel;
@@ -19,8 +14,7 @@ import rp.robotics.localisation.PerfectSensorModel;
 import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.LocalisationUtils;
-import search.Solve;
-import search.Solve.Search;
+
 
 public class SensorAction extends RobotSettings {
 	
@@ -129,40 +123,6 @@ public class SensorAction extends RobotSettings {
 			{
 				
 				pilot.travel(60);
-				/*if(ran == 1){
-					System.out.println(action);
-					distribution = actionModel.updateAfterMove(distribution, action);
-					distribution.normalise();
-					action = cycleThroughtLeft(action);
-					//distribution = sensing4D(distribution);
-					//sensing
-					// senseleft, right, ahead, update distribution and carry on 
-				
-					pilot.rotate(90);
-				
-				
-				}
-				else if(ran ==2){
-					System.out.println(action);
-					distribution = actionModel.updateAfterMove(distribution, action);
-					distribution.normalise();
-					action = cycleThroughtRight(action);
-					//distribution = sensing4D(distribution);
-					pilot.rotate(-90);
-				}
-				else{ 
-					System.out.println(action);
-					distribution = actionModel.updateAfterMove(distribution, action);
-					distribution.normalise();
-					action = cycleThroughtForward(action);
-					//distribution = sensing4D(distribution);
-					pilot.forward();
-				}
-			
-				while(canMove()){
-					closeToGridWallCondition();
-					action = cycleThroughtLeft(action);			
-				}*/
 				System.out.println("sensing");
 				
 				if(sensor.getDistance() > wall){
@@ -207,8 +167,8 @@ public class SensorAction extends RobotSettings {
 			
 			Sound.beepSequence();
 		
-			Stack<Node<Point>> nodes = Solve.solveGrid(new Point(xPoss,yPoss,(xPoss+yPoss)), new Point(5,3,(5+3)), Search.BREADTH_FIRST);
-			SolveGrid grid = new SolveGrid(xPoss, yPoss, null);
+//			Stack<Node<Point>> nodes = Solve.solveGrid(new Point(xPoss,yPoss,(xPoss+yPoss)), new Point(5,3,(5+3)), Search.BREADTH_FIRST);
+//			SolveGrid grid = new SolveGrid(xPoss, yPoss, null);
 			
 	}
 

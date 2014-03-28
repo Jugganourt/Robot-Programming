@@ -266,12 +266,11 @@ public class Grid2 extends RobotSettings {
 //				System.out.println(count);
 //				System.out.println(action);
 //				System.out.println(rount.toString());
-//				System.out.println(rount);
+//				System.out.println(round);
 				if (rount.toString().equals("UP")) {
 					if(action == Heading.PLUS_Y){
 						action = cycleThroughtForward(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -279,7 +278,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(90);
 						action = cycleThroughtLeft(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -287,7 +285,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(-90);
 						action = cycleThroughtRight(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -303,7 +300,6 @@ public class Grid2 extends RobotSettings {
 					if(action == Heading.PLUS_Y){
 						action = cycleThroughtForward(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -311,7 +307,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(-90);
 						action = cycleThroughtRight(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -319,7 +314,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(90);
 						action = cycleThroughtLeft(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -335,7 +329,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(-90);						
 						action = cycleThroughtRight(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -347,7 +340,6 @@ public class Grid2 extends RobotSettings {
 					else if(action == Heading.MINUS_X){
 						action = cycleThroughtForward(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -355,7 +347,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(90);
 						action = cycleThroughtLeft(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -364,14 +355,12 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(90);
 						action = cycleThroughtLeft(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
 					else if(action == Heading.PLUS_X){
 						action = cycleThroughtForward(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -384,7 +373,6 @@ public class Grid2 extends RobotSettings {
 						pilot.rotate(-90);
 						action = cycleThroughtRight(action);
 						if (count != path.size() - 1) {
-							System.out.println(path.get(count));
 							count++;
 						}
 					}
@@ -395,65 +383,7 @@ public class Grid2 extends RobotSettings {
 
 				
 			}
-		}
-				/**
-		for (int i = 0; i < path.size(); i++) {
-			if (path.get(i) == Grid.PuzzleMove.UP) {
-				if (action == Heading.PLUS_X) {
-					list.add(1);
-					action = Heading.MINUS_Y;
-				} else if (action == Heading.PLUS_Y) {
-					list.add(4);
-					action=Heading.MINUS_Y;
-				} else if (action == Heading.MINUS_X) {
-					list.add(2);
-					action = Heading.MINUS_Y;
-				} else if (action == Heading.MINUS_Y) {
-					list.add(0);
-				}
-			} else if (path.get(i) == Grid.PuzzleMove.DOWN) {
-				if (action == Heading.PLUS_X) {
-					list.add(2);
-					action = Heading.PLUS_Y;
-				} else if (action == Heading.PLUS_Y) {
-					list.add(0);
-				} else if (action == Heading.MINUS_X) {
-					list.add(1);
-					action = Heading.PLUS_Y;
-				} else if (action == Heading.MINUS_Y) {
-					list.add(4);
-					action=Heading.PLUS_Y;
-				}
-			} else if (path.get(i) == Grid.PuzzleMove.RIGHT) {
-				if (action == Heading.PLUS_X) {
-					list.add(0);
-				} else if (action == Heading.PLUS_Y) {
-					list.add(1);
-					action=Heading.PLUS_X;
-				} else if (action == Heading.PLUS_X) {
-					list.add(4);
-					action=Heading.MINUS_X;
-				} else if (action == Heading.MINUS_Y) {
-					list.add(2);
-					action = Heading.PLUS_X;
-				}
-				}
-			else if (path.get(i) == Grid.PuzzleMove.LEFT) {
-				if (action == Heading.PLUS_X) {
-					list.add(4);
-					action=Heading.MINUS_X;
-				} else if (action == Heading.PLUS_Y) {
-					list.add(2);
-					action=Heading.MINUS_X;
-				} else if (action == Heading.MINUS_X) {
-					list.add(0);
-				} else if (action == Heading.MINUS_Y) {
-					list.add(1);
-					action = Heading.MINUS_X;
-				}
-				}
-			}**/
-		
+		}		
 	}
 
 	private double maxprob(GridMap gridMap) {
