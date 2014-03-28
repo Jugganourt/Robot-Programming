@@ -83,7 +83,7 @@ public class PerfectSensorModel {
 		// _dist.normalise();
 	}
 	private boolean aprox(float value, float curr) {
-		if(value>800 || (curr<value+70 && curr>value-70)) // accepts an error of 7 cm
+		if(value>80 || (curr<value+7 && curr>value-7)) // accepts an error of 7 cm
 		{
 			
 			return true;
